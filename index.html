@@ -1,560 +1,504 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="color-scheme" content="dark" />
-  <title>Lizenzangebote – Azubi-App mit Ausbilder-System | 🖤 RE:BELLE™ Media</title>
-  <meta name="description" content="Lizenzangebote inkl. Preise für die Azubi-App mit Ausbilder-System: Betriebslizenz Basic/Pro, Multi-Standort Lizenz, optionale Updates & Module. Offlinefähig, ohne Cloud-Pflicht, ZIP-Delivery." />
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MiseRebel · Azubi Master – Hybrid: gehostet nutzbar + Offline-Paket (AP1/AP2)</title>
+  <meta name="description" content="Hybrid nutzbar (gehostet) + Offline-Paket: digitales Berichtsheft mit Unterschriften & PDF-Export, AP1/AP2-Training, Quiz, Glossar, Warenkunde & Ausbilder-Dashboard." />
+  <meta name="theme-color" content="#EFECE6" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --bg0:#07080b;
-      --bg1:#0b0e14;
-      --card:#0f141e;
-      --card2:#0c111a;
-      --ink:#f4f6ff;
-      --muted:#c5cada;
-      --faint:rgba(245,247,255,.08);
-      --line:rgba(245,247,255,.12);
-      --accent:#ffffff;
-      --shadow: 0 18px 60px rgba(0,0,0,.55);
-      --radius: 22px;
-      --radius2: 16px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      background:
-        radial-gradient(900px 500px at 10% -10%, rgba(255,255,255,.08), transparent 55%),
-        radial-gradient(900px 600px at 110% 10%, rgba(255,255,255,.05), transparent 55%),
-        linear-gradient(180deg,var(--bg0),var(--bg1));
-      color:var(--ink);
-      line-height:1.45;
-    }
-    a{color:inherit}
-    .wrap{max-width:1120px;margin:0 auto;padding:22px 16px 40px}
-    .topbar{
-      display:flex;align-items:center;justify-content:space-between;gap:14px;
-      padding:14px 14px;border:1px solid var(--line);border-radius:999px;
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      box-shadow: 0 10px 40px rgba(0,0,0,.35);
-      position:sticky;top:10px;z-index:20;
-      backdrop-filter: blur(10px);
-    }
-    .brand{
-      display:flex;align-items:center;gap:10px;min-width:0
-    }
-    .brand .heart{font-size:18px;opacity:.95}
-    .brand .name{
-      font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-      font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
-    }
-    .nav{
-      display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end
-    }
-    .nav a{
-      text-decoration:none;
-      padding:8px 10px;border:1px solid var(--line);border-radius:999px;
-      background:rgba(255,255,255,.02);
-      font-size:12px;color:var(--muted)
-    }
-    .nav a:hover{border-color:rgba(255,255,255,.24);color:var(--ink)}
-    header{padding:26px 4px 10px}
-    .kicker{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:10px 12px;border-radius:999px;border:1px solid var(--line);
-      background:rgba(255,255,255,.02);
-      color:var(--muted);font-size:12px
-    }
-    h1{
-      margin:14px 0 10px;
-      font-size: clamp(28px, 5.5vw, 54px);
-      line-height:1.05;
-      letter-spacing:-.02em;
-    }
-    .sub{
-      margin:0;
-      color:var(--muted);
-      font-size: clamp(14px, 2.6vw, 18px);
-      max-width: 68ch;
-    }
-    .heroGrid{
-      display:grid;grid-template-columns:1fr;gap:14px;margin:18px 0 10px
-    }
-    @media (min-width: 900px){
-      .heroGrid{grid-template-columns: 1.2fr .8fr;gap:16px}
-    }
-    .panel{
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      box-shadow:var(--shadow);
-      padding:18px;
-      overflow:hidden;
-      position:relative;
-    }
-    .panel:before{
-      content:"";
-      position:absolute;inset:-2px;
-      background:
-        radial-gradient(600px 240px at 10% 0%, rgba(255,255,255,.10), transparent 60%),
-        radial-gradient(520px 220px at 90% 20%, rgba(255,255,255,.06), transparent 60%);
-      opacity:.75;pointer-events:none;
-    }
-    .panel > *{position:relative}
-    .facts{
-      display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:10px;margin-top:14px
-    }
-    @media (min-width: 520px){
-      .facts{grid-template-columns:repeat(4, minmax(0,1fr))}
-    }
-    .fact{
-      padding:12px;border:1px solid var(--line);border-radius:16px;
-      background:rgba(0,0,0,.18)
-    }
-    .fact b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-    .fact span{font-weight:600}
-    .ctaRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      padding:12px 14px;border-radius:999px;border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      text-decoration:none;font-weight:700;font-size:13px
-    }
-    .btn.primary{
-      background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.06));
-      border-color:rgba(255,255,255,.28);
-    }
-    .btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.30)}
-    .smallNote{color:var(--muted);font-size:12px;margin-top:10px}
-
-    section{padding:18px 4px 0}
-    .sectionHead{
-      display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;
-      margin-bottom:12px
-    }
-    .sectionHead h2{margin:0;font-size:22px;letter-spacing:-.01em}
-    .sectionHead p{margin:0;color:var(--muted);max-width:70ch;font-size:13px}
-    .grid{
-      display:grid;grid-template-columns:1fr;gap:12px
-    }
-    @media (min-width: 840px){
-      .grid{grid-template-columns: repeat(3, minmax(0,1fr))}
-    }
-    .card{
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
-      box-shadow: 0 12px 45px rgba(0,0,0,.40);
-      padding:16px;
-      position:relative;
-      overflow:hidden;
-      min-height: 320px;
-      display:flex;flex-direction:column;gap:12px
-    }
-    .card:before{
-      content:"";
-      position:absolute;inset:-2px;
-      background: radial-gradient(520px 220px at 20% 0%, rgba(255,255,255,.08), transparent 60%);
-      opacity:.75;pointer-events:none
-    }
-    .card > *{position:relative}
-    .badge{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:8px 10px;border-radius:999px;border:1px solid var(--line);
-      background:rgba(0,0,0,.20);
-      color:var(--muted);
-      font-size:12px
-    }
-    .price{
-      display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap
-    }
-    .price .amount{
-      font-size:30px;font-weight:800;letter-spacing:-.02em
-    }
-    .price .meta{
-      color:var(--muted);font-size:12px
-    }
-    .card h3{margin:0;font-size:18px}
-    ul{
-      margin:0;padding-left:18px;color:var(--muted);font-size:13px
-    }
-    li{margin:6px 0}
-    .card .strong{
-      margin-top:auto;
-      padding-top:12px;border-top:1px solid var(--line);
-      display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap
-    }
-    .card .strong span{color:var(--muted);font-size:12px}
-    .card .strong b{font-size:13px}
-    .card.featured{
-      border-color:rgba(255,255,255,.28);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-    }
-    .tag{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:8px 10px;border-radius:999px;border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      color:var(--muted);font-size:12px
-    }
-    .twoCol{
-      display:grid;grid-template-columns:1fr;gap:12px
-    }
-    @media (min-width: 900px){
-      .twoCol{grid-template-columns: 1fr 1fr}
-    }
-    .box{
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:rgba(255,255,255,.02);
-      padding:16px
-    }
-    .box h4{margin:0 0 10px;font-size:16px}
-    .box p{margin:0;color:var(--muted);font-size:13px}
-    .box .list{
-      margin-top:10px;color:var(--muted);font-size:13px
-    }
-    .legal{
-      color:var(--muted);font-size:12px;line-height:1.55
-    }
-    footer{
-      margin-top:22px;
-      border-top:1px solid var(--line);
-      padding:22px 6px 10px;
-      color:var(--muted);
-    }
-    .footerGrid{
-      display:grid;grid-template-columns:1fr;gap:12px
-    }
-    @media (min-width: 860px){
-      .footerGrid{grid-template-columns: 1.2fr .8fr}
-    }
-    .sig{
-      font-family:Allura,cursive;
-      font-size:28px;color:var(--ink);margin:6px 0 0
-    }
-    .links{
-      display:flex;flex-direction:column;gap:8px
-    }
-    .links a{
-      text-decoration:none;
-      display:inline-flex;align-items:center;gap:10px;
-      padding:10px 12px;border-radius:14px;border:1px solid var(--line);
-      background:rgba(255,255,255,.02);color:var(--ink)
-    }
-    .links a small{color:var(--muted)}
-    .fine{
-      margin-top:12px;
-      font-size:11px;color:rgba(197,202,218,.75)
-    }
-    .divider{height:1px;background:var(--line);margin:14px 0}
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="topbar" role="navigation" aria-label="Navigation">
+  <a class="skip" href="#content">Zum Inhalt</a>
+
+  <header class="topbar">
+    <div class="wrap topbar__inner">
       <div class="brand">
-        <div class="heart">🖤</div>
-        <div class="name">RE:BELLE™ Media</div>
+        <div class="brand__mark" aria-hidden="true">🖤</div>
+        <div class="brand__text">
+          <div class="brand__name">MiseRebel · Azubi Master</div>
+          <div class="brand__tag">Offline-Paket · Berichtsheft · Prüfung · Ausbilder</div>
+        </div>
       </div>
-      <div class="nav">
-        <a href="#lizenzen">Lizenzmodelle</a>
-        <a href="#updates">Updates & Module</a>
-        <a href="#recht">Rahmenbedingungen</a>
-        <a href="#kontakt">Kontakt</a>
+
+      <nav class="topnav" aria-label="Navigation">
+        <a href="#features">Features</a>
+        <a href="#hybrid">Hybrid</a>
+        <a href="#screens">Screens</a>
+        <a href="#offline">Offline</a>
+        <a href="#setup">Start</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="topbar__cta">
+        <a class="btn btn--ghost" href="#setup">So startest du</a>
+        <a class="btn btn--primary" href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener">Download im Shop</a>
       </div>
     </div>
+  </header>
 
-    <header>
-      <div class="kicker">Azubi-App mit Ausbilder-System · Offlinefähig · Betrieblich kontrollierbar</div>
-      <h1>Lizenzangebote & Preise</h1>
-      <p class="sub">
-        Keine Cloud-Pflicht. Keine App-Store-Abhängigkeit. Keine laufenden Plattformkosten.
-        Bereitstellung als ZIP-Dateipaket – Start über <b>index.html</b>. Daten bleiben im Betrieb.
-      </p>
+  <main id="content">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <div class="pill">🖤 Hybrid: gehostet nutzbar · Offline-fähig · DE/EN/FR · Azubi + Ausbilder</div>
 
-      <div class="heroGrid">
-        <div class="panel">
-          <h2 style="margin:0 0 10px;font-size:20px;letter-spacing:-.01em;">Wofür Sie hier zahlen</h2>
-          <p style="margin:0;color:var(--muted);font-size:13px;max-width:80ch;">
-            Sie erwerben eine Lizenz zur betrieblichen Nutzung der Software im vereinbarten Umfang.
-            Das System bleibt technisch schlank, offline nutzbar und betrieblich kontrollierbar –
-            ohne Cloud-Zwang und ohne zusätzliche IT-Infrastruktur.
+          <h1>
+            Ein Berichtsheft, das nicht nervt.
+            <span class="h1__accent">Und eine Prüfung, die nicht überrascht.</span>
+          </h1>
+
+          <p class="lead">
+            <strong>MiseRebel · Azubi Master</strong> ist dein <strong>Hybrid-System</strong> fürs Gastgewerbe:
+            <strong>gehostet sofort nutzbar</strong> (Hybrid) <em>oder</em> als <strong>Offline-Paket</strong>.
+            Dazu: digitales <strong>Berichtsheft</strong> mit <strong>Unterschriften</strong> & <strong>PDF-Export</strong>,
+            plus <strong>AP1/AP2-Training</strong>, Quiz, Glossar, Warenkunde und ein Ausbilder-Dashboard.
           </p>
 
-          <div class="facts" aria-label="Kernmerkmale">
-            <div class="fact"><b>Bereitstellung</b><span>ZIP-Dateipaket</span></div>
-            <div class="fact"><b>Start</b><span>index.html</span></div>
-            <div class="fact"><b>Nutzung</b><span>Offline möglich</span></div>
-            <div class="fact"><b>Kontrolle</b><span>Im Betrieb</span></div>
+          <div class="hero__bullets">
+            <div class="bullet"><span class="dot"></span><span><strong>Berichtsheft</strong> (Tag/Woche/Archiv) + Wochenabgabe</span></div>
+            <div class="bullet"><span class="dot"></span><span><strong>Unterschriften</strong> (Azubi + Ausbilder) + <strong>PDF teilen</strong></span></div>
+            <div class="bullet"><span class="dot"></span><span><strong>AP1 & AP2</strong> Training + Quiz</span></div>
+            <div class="bullet"><span class="dot"></span><span><strong>Offline-First</strong> mit Sync-Warteschlange & Status</span></div>
           </div>
 
-          <div class="ctaRow" aria-label="Call-to-Action">
-            <a class="btn primary" href="#kontakt">Lizenz anfragen</a>
-            <a class="btn" href="mailto:rebelle.media.creator@gmail.com?subject=Lizenz%20anfragen%20%E2%80%93%20Azubi-App%20mit%20Ausbilder-System&body=Hallo%20Tina%2C%0A%0Awir%20interessieren%20uns%20f%C3%BCr%20eine%20Lizenz%20f%C3%BCr%20die%20Azubi-App%20mit%20Ausbilder-System.%20Bitte%20sendet%20uns%20das%20Angebot%20(gew%C3%BCnschte%20Lizenzform%2C%20Anzahl%20Standorte%2C%20Ausbildungsbereiche).%0A%0AViele%20Gr%C3%BC%C3%9Fe">E-Mail senden</a>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener">Jetzt sichern</a>
+            <button class="btn btn--ghost" type="button" data-scroll="#features">Zeig mir die Features</button>
           </div>
-          <div class="smallNote">Hinweis: White-Label ist als Option in Arbeit und derzeit nicht buchbar.</div>
+
+          <div class="micro">
+            Hybrid-Option: Du kannst das System auch <strong>gehostet</strong> nutzen (ohne lokalen Start). Offline bleibt zusätzlich möglich.
+            Hinweis: Der erste Login benötigt Internet. Danach funktioniert die App auch offline (außer Login selbst).
+          </div>
         </div>
 
-        <div class="panel">
-          <h2 style="margin:0 0 10px;font-size:20px;letter-spacing:-.01em;">Schnellauswahl</h2>
-          <div class="divider"></div>
+        <aside class="hero__card" aria-label="Kurzüberblick">
+          <div class="glass">
+            <div class="glass__head">
+              <div class="glass__title">Was du bekommst</div>
+              <div class="glass__badge">Offline-Paket</div>
+            </div>
 
-          <div class="tag">Handwerksbetrieb · Ein Standort → <b>Basic</b> oder <b>Pro</b></div>
-          <div class="tag">Hotelkette · Mehrere Standorte → <b>Multi-Standort</b></div>
-          <div class="tag">Langfristig Inhalte aktuell halten → <b>Update-Option</b></div>
+            <div class="glass__list">
+              <div class="row">
+                <div class="k">Zielgruppe</div>
+                <div class="v">Azubis + Ausbilder (Gastgewerbe)</div>
+              </div>
+              <div class="row">
+                <div class="k">Inhalte</div>
+                <div class="v">Berichtsheft · AP1 · AP2 · Quiz · Glossar · Warenkunde</div>
+              </div>
+              <div class="row">
+                <div class="k">Sprachen</div>
+                <div class="v">DE · EN · FR</div>
+              </div>
+              <div class="row">
+                <div class="k">Export</div>
+                <div class="v">PDF · CSV/JSON</div>
+              </div>
+              <div class="row">
+                <div class="k">Offline</div>
+                <div class="v">Lokale Speicherung + Sync-Queue</div>
+              </div>
+              <div class="row">
+                <div class="k">Hybrid</div>
+                <div class="v">Gehostet nutzbar (optional)</div>
+              </div>
+              <div class="row">
+                <div class="k">Support</div>
+                <div class="v"><a href="mailto:rebelle.media.creator@gmail.com">rebelle.media.creator@gmail.com</a></div>
+              </div>
+            </div>
 
-          <div class="divider"></div>
-          <p style="margin:0;color:var(--muted);font-size:13px;">
-            Wenn Sie uns kurz Ihre Situation schicken (Branche, Standorte, Anzahl Azubis),
-            erhalten Sie ein sauberes Lizenzangebot inkl. Bereitstellungsdetails.
+            <div class="glass__note">
+              <strong>Für Betriebe:</strong> Ausbilder-Dashboard mit Zuweisung, Notizen, Lehrstoff & Gegenzeichnung.
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- HYBRID -->
+    <section id="hybrid" class="section">
+      <div class="wrap">
+        <div class="section__head">
+          <h2>Hybrid verkauft besser. Weil Betriebe Auswahl wollen.</h2>
+          <p class="section__sub">
+            Manche wollen sofort starten (gehostet). Andere wollen Offline (ZIP). Du bietest beides – ohne dass es nach Kompromiss aussieht.
           </p>
         </div>
-      </div>
-    </header>
 
-    <section id="lizenzen" aria-label="Lizenzmodelle">
-      <div class="sectionHead">
-        <div>
-          <h2>Lizenzmodelle</h2>
-          <p>Alle Lizenzen sind als Einmalzahlung konzipiert. Updates sind optional (siehe unten).</p>
-        </div>
-      </div>
-
-      <div class="grid">
-        <article class="card" aria-label="Betriebslizenz Basic">
-          <div class="badge">Betriebslizenz · Einstieg</div>
-          <div class="price">
-            <div class="amount">990 €</div>
-            <div class="meta">einmalig · 1 Betrieb / 1 Standort</div>
-          </div>
-          <h3>Basic</h3>
-          <ul>
-            <li>Azubi-App + Ausbilder-System</li>
-            <li>Unbegrenzte Azubis im Betrieb</li>
-            <li>Offline nutzbar · Start über index.html</li>
-            <li>PDF-Export (Berichtsheft)</li>
-            <li>6 Monate Updates (Hauptversion)</li>
-          </ul>
-          <div class="strong">
-            <span>Ideal für</span>
-            <b>Handwerksbetriebe & KMU</b>
-          </div>
-        </article>
-
-        <article class="card featured" aria-label="Betriebslizenz Pro">
-          <div class="badge">Betriebslizenz · Empfehlung</div>
-          <div class="price">
-            <div class="amount">1.290 €</div>
-            <div class="meta">einmalig · 1 Betrieb / 1 Standort</div>
-          </div>
-          <h3>Pro</h3>
-          <ul>
-            <li>Azubi-App + Ausbilder-System</li>
-            <li>Unbegrenzte Azubis im Betrieb</li>
-            <li>Offline nutzbar · Start über index.html</li>
-            <li>PDF-Export (Berichtsheft)</li>
-            <li>12 Monate Updates (Hauptversion)</li>
-          </ul>
-          <div class="strong">
-            <span>Ideal für</span>
-            <b>Betriebe, die sofort sauber standardisieren</b>
-          </div>
-        </article>
-
-        <article class="card" aria-label="Multi-Standort Lizenz">
-          <div class="badge">Skalierung · Mehrere Standorte</div>
-          <div class="price">
-            <div class="amount">3.490 €</div>
-            <div class="meta">einmalig · bis 3 Standorte</div>
-          </div>
-          <h3>Multi-Standort</h3>
-          <ul>
-            <li>Einheitliche Ausbildungsstruktur über Standorte</li>
-            <li>Zentrale Inhaltslogik (JSON-basiert)</li>
-            <li>Ausbilder-System je Standort</li>
-            <li>Offline nutzbar · keine Cloud-Pflicht</li>
-            <li>12 Monate Updates (Hauptversion)</li>
-          </ul>
-          <div class="strong">
-            <span>Option</span>
-            <b>+ weiterer Standort: 690 €</b>
-          </div>
-        </article>
-      </div>
-
-      <div class="twoCol" style="margin-top:12px;">
-        <div class="box">
-          <h4>White-Label (in Arbeit)</h4>
-          <p>
-            White-Label ist als Option geplant (Branding/Domäne/Partner-Nutzung), derzeit jedoch nicht buchbar.
-            Sobald die Option verfügbar ist, wird sie als separates Lizenzmodell ausgewiesen.
-          </p>
-        </div>
-        <div class="box">
-          <h4>Was immer gilt</h4>
-          <div class="list">
+        <div class="two">
+          <div class="card card--soft">
+            <h3>Option A: Gehostet nutzbar (Hybrid)</h3>
             <ul>
-              <li>Keine Cloud-Pflicht · keine Drittplattform</li>
-              <li>Bereitstellung als ZIP · Start über index.html</li>
-              <li>Daten bleiben im Betrieb (lokal)</li>
-              <li>DSGVO-konform umsetzbar (betrieblich kontrollierbar)</li>
+              <li>Sofort loslegen – kein lokaler Start, kein Installations-Drama</li>
+              <li>Ideal für Betriebe, die „einfach funktionieren“ wollen</li>
+              <li>Perfekt für Pilot & Rollout</li>
+            </ul>
+            <div class="hero__actions" style="margin-top:12px">
+              <a class="btn btn--primary" href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener">Hybrid im Shop öffnen</a>
+            </div>
+          </div>
+
+          <div class="card card--soft">
+            <h3>Option B: Offline-Paket (ZIP)</h3>
+            <ul>
+              <li>Läuft auch ohne WLAN – Einträge werden lokal gespeichert</li>
+              <li>Sync später automatisch (Status sichtbar)</li>
+              <li>Ideal für Schulungen, Keller-WLAN und „Realität“</li>
+            </ul>
+            <div class="hero__actions" style="margin-top:12px">
+              <a class="btn btn--ghost" href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener">Offline-Paket im Shop</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ctaBand" style="margin-top:16px">
+          <div>
+            <div class="ctaBand__title">Ein Link. Zwei Nutzungswege. Mehr Abschlüsse.</div>
+            <div class="ctaBand__sub">Du nimmst Betrieben die Entscheidungslast ab – und gibst ihnen trotzdem Kontrolle.</div>
+          </div>
+          <a class="btn btn--primary" href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener">Jetzt sichern</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST STRIP -->
+    <section class="strip">
+      <div class="wrap strip__grid">
+        <div class="strip__item">
+          <div class="strip__icon">📎</div>
+          <div class="strip__text">
+            <div class="strip__title">Weniger Chaos</div>
+            <div class="strip__desc">Ein Ort für Bericht, Wissen & Prüfung.</div>
+          </div>
+        </div>
+        <div class="strip__item">
+          <div class="strip__icon">🖤</div>
+          <div class="strip__text">
+            <div class="strip__title">Mehr Ruhe</div>
+            <div class="strip__desc">Offline arbeiten, später automatisch syncen.</div>
+          </div>
+        </div>
+        <div class="strip__item">
+          <div class="strip__icon">📎</div>
+          <div class="strip__text">
+            <div class="strip__title">Mehr Nachweis</div>
+            <div class="strip__desc">PDF-Export + Unterschriften + Archiv.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="section">
+      <div class="wrap">
+        <div class="section__head">
+          <h2>Features, die im Alltag wirklich ziehen.</h2>
+          <p class="section__sub">
+            Nicht “noch eine App”. Sondern ein System, das Azubis führt – und Ausbilder entlastet.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <h3>Berichtsheft</h3>
+            <ul>
+              <li>Tageseinträge + Wochenübersicht (Mo–Fr)</li>
+              <li>Wochenabgabe + Archiv über Ausbildungsjahre</li>
+              <li>Signatur-Flow: Azubi unterschreibt, Ausbilder gegenzeichnet</li>
+              <li>PDF: Drucken, Download, Teilen</li>
+              <li>Export zusätzlich als CSV/JSON</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Prüfung & Training</h3>
+            <ul>
+              <li>AP1-Bereich + AP2-Bereich getrennt</li>
+              <li>Lernquiz + Statistiken/Score-Logik</li>
+              <li>Wiederholen statt raten</li>
+              <li>Training im Betrieb & zuhause</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Wissen</h3>
+            <ul>
+              <li>Glossar zum schnellen Nachschlagen</li>
+              <li>Warenkunde-Bereich</li>
+              <li>“Mein Lehrstoff” – Inhalte vom Ausbilder</li>
+              <li>Badge-Hinweise auf neue Inhalte</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Ausbilder-Dashboard</h3>
+            <ul>
+              <li>Azubis zuweisen und Berichtshefte einsehen</li>
+              <li>Notizen senden (ohne WhatsApp-Chaos)</li>
+              <li>Lehrstoff bereitstellen</li>
+              <li>Gegenzeichnung + PDF-Sicherung</li>
+              <li>KI-Nutzung einsehbar</li>
+            </ul>
+            <div class="note">
+              In diesem Build ist die Zuweisung technisch auf <strong>2 Azubis</strong> begrenzt (Pilot-/Demo-Logik).
+            </div>
+          </article>
+        </div>
+
+        <div class="ctaBand">
+          <div>
+            <div class="ctaBand__title">Du willst, dass Betriebe das ernst nehmen?</div>
+            <div class="ctaBand__sub">Dann verkaufst du nicht Software. Du verkaufst Nachweis, Klarheit, Routine.</div>
+          </div>
+          <a class="btn btn--primary" href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener">Download im Shop</a>
+        </div>
+      </div>
+    
+    <!-- SCREENS -->
+    <section id="screens" class="section">
+      <div class="wrap">
+        <div class="section__head">
+          <h2>So sieht’s aus. So fühlt’s sich an.</h2>
+          <p class="section__sub">
+            Keine Theorie. Hier sind echte Screens aus dem System – Berichtsheft, Training, Sync und Ausbilder-Ansicht.
+            Tipp: Antippen/Anklicken öffnet groß.
+          </p>
+        </div>
+
+        <div class="screenGrid" data-lightbox>
+          <figure class="screen">
+            <button class="screen__btn" type="button" data-img="assets/screens/login.png" aria-label="Login Screen groß anzeigen">
+              <img src="assets/screens/login.png" alt="Login – MiseRebel Azubi Master" loading="lazy" />
+            </button>
+            <figcaption>Login (erster Start online)</figcaption>
+          </figure>
+
+          <figure class="screen">
+            <button class="screen__btn" type="button" data-img="assets/screens/berichtsheft_oben.png" aria-label="Berichtsheft Screen groß anzeigen">
+              <img src="assets/screens/berichtsheft_oben.png" alt="Berichtsheft – Wochenübersicht" loading="lazy" />
+            </button>
+            <figcaption>Berichtsheft (Woche)</figcaption>
+          </figure>
+
+          <figure class="screen">
+            <button class="screen__btn" type="button" data-img="assets/screens/ap_simulator.png" aria-label="AP Simulator Screen groß anzeigen">
+              <img src="assets/screens/ap_simulator.png" alt="AP1/AP2 Training – Simulator" loading="lazy" />
+            </button>
+            <figcaption>AP1/AP2 Training</figcaption>
+          </figure>
+
+          <figure class="screen">
+            <button class="screen__btn" type="button" data-img="assets/screens/quiz.png" aria-label="Quiz Screen groß anzeigen">
+              <img src="assets/screens/quiz.png" alt="Quiz – Lerntraining" loading="lazy" />
+            </button>
+            <figcaption>Quiz (Lerntraining)</figcaption>
+          </figure>
+
+          <figure class="screen">
+            <button class="screen__btn" type="button" data-img="assets/screens/warenkunde.png" aria-label="Warenkunde Screen groß anzeigen">
+              <img src="assets/screens/warenkunde.png" alt="Warenkunde – Nachschlagen" loading="lazy" />
+            </button>
+            <figcaption>Warenkunde</figcaption>
+          </figure>
+
+          <figure class="screen">
+            <button class="screen__btn" type="button" data-img="assets/screens/lehrstoff.png" aria-label="Lehrstoff Screen groß anzeigen">
+              <img src="assets/screens/lehrstoff.png" alt="Lehrstoff – Inhalte vom Ausbilder" loading="lazy" />
+            </button>
+            <figcaption>Lehrstoff vom Ausbilder</figcaption>
+          </figure>
+
+          <figure class="screen">
+            <button class="screen__btn" type="button" data-img="assets/screens/sync.png" aria-label="Sync Screen groß anzeigen">
+              <img src="assets/screens/sync.png" alt="Sync – Offline Warteschlange" loading="lazy" />
+            </button>
+            <figcaption>Offline-Sync & Status</figcaption>
+          </figure>
+
+          <figure class="screen">
+            <button class="screen__btn" type="button" data-img="assets/screens/10info_status.png" aria-label="Info Status Screen groß anzeigen">
+              <img src="assets/screens/10info_status.png" alt="Info & Status – Übersicht" loading="lazy" />
+            </button>
+            <figcaption>Info & Status</figcaption>
+          </figure>
+        </div>
+
+        <div class="ctaBand">
+          <div>
+            <div class="ctaBand__title">Wenn das so aussehen soll – dann hol’s dir nicht „irgendwann“.</div>
+            <div class="ctaBand__sub">Du bekommst das komplette Offline-Paket inkl. Ausbilder-Dashboard als Download im Shop.</div>
+          </div>
+          <a class="btn btn--primary" href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener">Zum Produkt</a>
+        </div>
+      </div>
+    </section>
+</section>
+
+    <!-- OFFLINE -->
+    <section id="offline" class="section section--alt">
+      <div class="wrap">
+        <div class="section__head">
+          <h2>Offline-First. Weil Realität nicht immer WLAN hat.</h2>
+          <p class="section__sub">
+            Einträge werden lokal gespeichert und später synchronisiert. Du siehst jederzeit den Sync-Status.
+          </p>
+        </div>
+
+        <div class="two">
+          <div class="card card--soft">
+            <h3>So funktioniert’s</h3>
+            <ol>
+              <li>Erster Login online.</li>
+              <li>Danach: Berichtsheft & Training auch ohne Internet.</li>
+              <li>Alles landet in einer Sync-Warteschlange.</li>
+              <li>Sobald wieder online: automatische Synchronisation.</li>
+            </ol>
+          </div>
+
+          <div class="card card--soft">
+            <h3>Wichtig</h3>
+            <ul>
+              <li><strong>Website-Daten nicht löschen</strong>, solange der Sync-Zähler &gt; 0 ist.</li>
+              <li>Sync-Status ist in der App sichtbar (Tab “Sync” + “Info & Status”).</li>
+              <li>PDF-Export funktioniert im Browser, “Teilen” je nach Gerät.</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="updates" aria-label="Updates und Module">
-      <div class="sectionHead">
-        <div>
-          <h2>Updates & Module (optional)</h2>
-          <p>Keine Abo-Bindung. Wer aktuell bleiben will, kann freiwillig verlängern oder Module ergänzen.</p>
-        </div>
-      </div>
-
-      <div class="twoCol">
-        <div class="box" aria-label="Update-Option">
-          <h4>Update-Option</h4>
-          <p>
-            Nach dem enthaltenen Update-Zeitraum kann eine freiwillige Update-Lizenz abgeschlossen werden,
-            um neue Inhalte (z. B. Fragenpools, AO-Anpassungen) und Funktionsupdates zu erhalten.
-          </p>
-          <div class="divider"></div>
-          <p style="margin:0;color:var(--ink);font-weight:800;font-size:18px;">290 € / Jahr</p>
-          <p style="margin:6px 0 0;color:var(--muted);font-size:12px;">freiwillig · keine automatische Verlängerung</p>
+    <!-- SETUP -->
+    <section id="setup" class="section">
+      <div class="wrap">
+        <div class="section__head">
+          <h2>Start in 3 Minuten (Windows/Mac)</h2>
+          <p class="section__sub">Du entpackst, startest – und arbeitest im Browser.</p>
         </div>
 
-        <div class="box" aria-label="Erweiterungsmodule">
-          <h4>Erweiterungsmodule</h4>
-          <p>
-            Zusatzmodule können unabhängig vom Lizenztyp ergänzt werden – je nach Bedarf im Betrieb.
-          </p>
-          <div class="list">
-            <ul>
-              <li>Erweiterte Prüfungspools</li>
-              <li>Zusätzliche Fachinhalte (JSON)</li>
-              <li>Optionale KI-Lernunterstützung (mit klaren Grenzen)</li>
-              <li>Weitere Ausbildungsbereiche / Erweiterungen</li>
-            </ul>
+        <div class="grid grid--3">
+          <article class="card">
+            <h3>1) Entpacken</h3>
+            <p>ZIP komplett entpacken (ganzer Ordner, keine Einzeldateien).</p>
+          </article>
+
+          <article class="card">
+            <h3>2) Starten</h3>
+            <p>
+              Windows: <strong>START_WINDOWS.cmd</strong><br />
+              Mac: <strong>START_MAC.command</strong>
+            </p>
+            <p class="small">Voraussetzung: Node.js oder Python installiert.</p>
+          </article>
+
+          <article class="card">
+            <h3>3) Login</h3>
+            <p>Erster Login online. Danach läuft die App offline weiter.</p>
+          </article>
+        </div>
+
+        <div class="callout">
+          <div class="callout__left">
+            <div class="callout__title">Für Ausbilder & Betriebe</div>
+            <div class="callout__sub">
+              Zuweisung → Wochenprüfung → Gegenzeichnung → PDF-Sicherung. Fertig.
+            </div>
           </div>
-          <div class="divider"></div>
-          <p class="legal" style="margin:0;">
-            Module werden als separate Position im Angebot ausgewiesen (Umfang abhängig vom Ausbildungsbereich).
-          </p>
+          <a class="btn btn--primary" href="mailto:rebelle.media.creator@gmail.com">Setup-Support anfragen</a>
         </div>
       </div>
     </section>
 
-    <section id="recht" aria-label="Rechtliche Rahmenbedingungen">
-      <div class="sectionHead">
-        <div>
-          <h2>Rahmenbedingungen (Kurzform)</h2>
-          <p>Sauber, verständlich, betrieblich kontrollierbar – ohne juristischen Nebel.</p>
+    <!-- FAQ -->
+    <section id="faq" class="section section--alt">
+      <div class="wrap">
+        <div class="section__head">
+          <h2>FAQ</h2>
+          <p class="section__sub">Kurz. Klar. Ohne Ausreden.</p>
         </div>
-      </div>
 
-      <div class="box">
-        <div class="legal">
-          <p style="margin:0 0 10px;">
-            Mit dem Erwerb einer Lizenz wird ein <b>einfaches, nicht übertragbares Nutzungsrecht</b> eingeräumt.
-            Die Lizenz berechtigt zur Nutzung im vertraglich vereinbarten Umfang – nicht zum Eigentumserwerb am System.
-          </p>
-          <ul>
-            <li>Keine Weitergabe des ZIP-Dateipakets an Dritte</li>
-            <li>Keine öffentliche Bereitstellung (z. B. frei zugängliche Downloads)</li>
-            <li>Keine Unterlizenzierung / kein Weiterverkauf (White-Label ist aktuell nicht verfügbar)</li>
-            <li>Keine Änderungen der Systemstruktur, kein Reverse Engineering</li>
-            <li>Der Betrieb bleibt für datenschutzkonforme Nutzung verantwortlich</li>
-          </ul>
-          <p style="margin:10px 0 0;">
-            Detaillierte Regelungen werden im Lizenzvertrag festgehalten und dem Angebot beigefügt.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section id="kontakt" aria-label="Kontakt">
-      <div class="sectionHead">
-        <div>
-          <h2>Kontakt & Lizenzanfrage</h2>
-          <p>Kurze Info reicht: Branche, Standorte, Ausbildungsbereiche, ungefähre Azubi-Anzahl.</p>
-        </div>
-      </div>
-
-      <div class="twoCol">
-        <div class="box">
-          <h4>In 15 Minuten klären</h4>
-          <p>
-            Sie erhalten ein klares Angebot (Lizenzform + Bereitstellung + Vertragsdokumente).
-            Ohne Umwege, ohne Plattformbindung.
-          </p>
-          <div class="ctaRow">
-            <a class="btn primary" href="mailto:rebelle.media.creator@gmail.com?subject=Lizenzanfrage%20%E2%80%93%20Azubi-App%20mit%20Ausbilder-System&body=Hallo%20Tina%2C%0A%0Awir%20m%C3%B6chten%20eine%20Lizenz%20anfragen.%0A%0ABranche%3A%20%0AStandorte%3A%20%0AAusbildungsbereiche%3A%20%0AAzubis%20(ca.)%3A%20%0A%0AWunsch%20(Lizenz)%3A%20Basic%20/%20Pro%20/%20Multi-Standort%0A%0AViele%20Gr%C3%BC%C3%9Fe">
-              Lizenz anfragen
-            </a>
-            <a class="btn" href="https://rebellemedia.de" target="_blank" rel="noopener">rebellemedia.de</a>
+        <div class="faq" data-accordion>
+          <button class="faq__q" aria-expanded="false">
+            Brauche ich eine Installation?
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__a" hidden>
+            Nein. Du arbeitest im Browser. Für den Offline-Start wird ein kleiner lokaler Server genutzt, damit der file://-Modus nicht blockt.
           </div>
-          <p class="smallNote">E-Mail: rebelle.media.creator@gmail.com</p>
+
+          <button class="faq__q" aria-expanded="false">
+            Funktioniert das ohne Internet?
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__a" hidden>
+            Nach dem ersten Login: ja. Einträge werden lokal gespeichert und später automatisch synchronisiert (Status in der App).
+          </div>
+
+          <button class="faq__q" aria-expanded="false">
+            Kann ich das auch gehostet nutzen (Hybrid)?
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__a" hidden>
+            Ja. Neben dem Offline-Paket gibt es eine Hybrid-Option: gehostet nutzbar, ohne lokalen Start. Offline bleibt zusätzlich möglich.
+          </div>
+
+          <button class="faq__q" aria-expanded="false">
+            Kann ich Berichtshefte als PDF abgeben?
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__a" hidden>
+            Ja. Druckansicht + PDF-Download sind integriert. Je nach Gerät kannst du das PDF direkt teilen.
+          </div>
+
+          <button class="faq__q" aria-expanded="false">
+            Was ist mit Unterschriften?
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__a" hidden>
+            Azubi kann unterschreiben, Ausbilder gegenzeichnen. Damit wird die Abgabe nachvollziehbar und sauber dokumentiert.
+          </div>
         </div>
 
-        <div class="box">
-          <h4>Warum das für Betriebe funktioniert</h4>
-          <div class="list">
-            <ul>
-              <li>Ausbildung wird nachvollziehbar – ohne Zusatz-IT</li>
-              <li>Kontrolle & Übersicht im Betrieb (nicht bei Dritten)</li>
-              <li>Offlinefähigkeit schützt den Alltag vor „Systemausfällen“</li>
-              <li>Einmalzahlung statt Dauerbindung</li>
-            </ul>
+        <div class="finalCta">
+          <div class="finalCta__box">
+            <div class="finalCta__title">Wenn du willst, dass Azubis liefern – gib ihnen ein System.</div>
+            <div class="finalCta__sub">MiseRebel · Azubi Master: Nachweis, Training, Routine. Offline-fähig. Unterschreibbar. Exportierbar.</div>
+            <div class="finalCta__actions">
+              <a class="btn btn--primary" href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener">Jetzt sichern</a>
+              <a class="btn btn--ghost" href="https://rebellemedia.de" target="_blank" rel="noopener">Mehr über 🖤RE:BELLE™ Media</a>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <footer aria-label="Footer">
-      <div class="footerGrid">
-        <div>
-          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-            <div style="font-weight:800;letter-spacing:.08em;text-transform:uppercase;">🖤 RE:BELLE™ Media</div>
-            <div style="color:rgba(197,202,218,.85);font-size:12px;">The Art of Feeling. Amplified.</div>
-          </div>
-          <div class="sig">Tina</div>
-          <div class="fine">Lizenzangebote · Azubi-App mit Ausbilder-System · Offlinefähig · Betrieblich kontrollierbar</div>
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="wrap footer__inner">
+        <div class="footer__brand">
+          <div class="footer__logo">🖤RE:BELLE™ Media.</div>
+          <div class="footer__tag">The Art of Feeling. Amplified.</div>
         </div>
-
-        <div class="links">
-          <a href="mailto:rebelle.media.creator@gmail.com">
-            <span style="font-weight:800;">E-Mail</span>
-            <small>rebelle.media.creator@gmail.com</small>
-          </a>
-          <a href="https://www.newwomanintheshop.com" target="_blank" rel="noopener">
-            <span style="font-weight:800;">Shop</span>
-            <small>newwomanintheshop.com</small>
-          </a>
-          <a href="https://rebellemedia.de" target="_blank" rel="noopener">
-            <span style="font-weight:800;">Web</span>
-            <small>rebellemedia.de</small>
-          </a>
+        <div class="footer__links">
+          <a href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener">🖤 newwomanintheshop.com</a>
+          <a href="https://rebellemedia.de" target="_blank" rel="noopener">🖤 rebellemedia.de</a>
+          <a href="mailto:rebelle.media.creator@gmail.com">🖤 rebelle.media.creator@gmail.com</a>
         </div>
-      </div>
-
-      <div class="fine" style="margin-top:12px;">
-        © <span id="y"></span> 🖤 RE:BELLE™ Media · Alle Rechte vorbehalten.
+        <div class="footer__sig">
+          <span class="sig">Tina</span>
+        </div>
       </div>
     </footer>
-  </div>
+  </main>
 
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
