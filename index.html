@@ -1,504 +1,558 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MiseRebel · Azubi Master – Hybrid: gehostet nutzbar + Offline-Paket (AP1/AP2)</title>
-  <meta name="description" content="Hybrid nutzbar (gehostet) + Offline-Paket: digitales Berichtsheft mit Unterschriften & PDF-Export, AP1/AP2-Training, Quiz, Glossar, Warenkunde & Ausbilder-Dashboard." />
-  <meta name="theme-color" content="#EFECE6" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mise:Rebel™ – Dein digitaler Ausbildungsbegleiter</title>
+<meta name="description" content="Berichtsheft, Prüfungsvorbereitung, Lernquiz und KI-Coach – alles in einer App. Für Azubis und Ausbilder im Gastgewerbe.">
+<link rel="icon" href="favicon.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#1e2128;--bg2:#1a1d23;--fg:#fff;--muted:#9ca3af;--primary:hsl(20,99%,60%);--primary-dark:hsl(20,99%,45%);
+--success:hsl(89,94%,68%);--border:rgba(255,255,255,.12);--glass:rgba(255,255,255,.05);--glass-border:rgba(255,255,255,.12);
+--shadow:0 18px 40px rgba(0,0,0,.4);--radius:1rem;
+}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:radial-gradient(1200px 700px at 20% 0%,hsla(20,99%,60%,.10),transparent 60%),radial-gradient(900px 500px at 90% 20%,hsla(89,94%,68%,.06),transparent 60%),linear-gradient(180deg,var(--bg2),var(--bg));background-attachment:fixed;color:var(--fg);min-height:100vh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.glass{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);box-shadow:var(--shadow)}
+.btn-glow{border-color:hsla(20,99%,60%,.55);background:linear-gradient(180deg,hsla(20,99%,60%,.28),hsla(20,99%,60%,.12))}
+.btn-success-glow{border-color:hsla(89,94%,68%,.55);background:linear-gradient(180deg,hsla(89,94%,68%,.22),hsla(89,94%,68%,.10))}
+.max-w{max-width:1140px;margin:0 auto;padding:0 16px}
+.max-w-sm{max-width:860px;margin:0 auto;padding:0 16px}
+.max-w-md{max-width:720px;margin:0 auto;padding:0 16px}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s}
+.nav.scrolled{backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);background:rgba(30,33,40,.8);border-bottom:1px solid var(--border);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.nav-inner{max-width:1140px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-logo{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;font-size:18px}
+.nav-links{display:flex;align-items:center;gap:12px}
+.nav-links a.link{font-size:12px;color:var(--muted);transition:.2s}
+.nav-links a.link:hover{color:var(--fg)}
+.nav-cta{padding:8px 16px;border-radius:12px;font-size:12px;font-weight:700;background:var(--primary);color:#fff;transition:.2s}
+.nav-cta:hover{opacity:.9}
+@media(max-width:640px){.nav-links a.link{display:none}}
+
+/* Sections */
+section{padding:80px 0}
+h1{font-size:clamp(2.2rem,6vw,4.2rem);font-weight:900;line-height:1.1;letter-spacing:-.02em}
+h2{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900}
+h3{font-weight:700;font-size:1rem}
+
+/* Hero */
+.hero{padding-top:128px;padding-bottom:80px;text-align:center;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:100px;font-size:12px;color:var(--muted);margin-bottom:32px}
+.hero-sub{font-size:clamp(1rem,2.5vw,1.25rem);color:var(--muted);max-width:640px;margin:0 auto 40px;line-height:1.6}
+.hero-sub strong{color:var(--fg)}
+.hero-accent{color:var(--primary)}
+.hero-ctas{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px;margin-bottom:48px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;border-radius:16px;font-weight:700;color:#fff;background:linear-gradient(135deg,hsl(20,99%,55%),var(--primary-dark));transition:.2s;animation:pulseGlow 3s ease-in-out infinite}
+.btn-primary:hover{transform:scale(1.05)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;border-radius:16px;font-weight:700;transition:.2s}
+.btn-secondary:hover{transform:scale(1.05)}
+.berufe{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px}
+.beruf{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:100px;font-size:12px;color:var(--muted)}
+.glow1{position:absolute;top:80px;left:25%;width:384px;height:384px;border-radius:50%;opacity:.2;filter:blur(60px);background:hsl(20,99%,60%);pointer-events:none}
+.glow2{position:absolute;top:160px;right:25%;width:256px;height:256px;border-radius:50%;opacity:.1;filter:blur(60px);background:hsl(89,94%,68%);pointer-events:none}
+
+/* Stats */
+.stats{padding:32px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stats-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:32px;text-align:center}
+.stat-val{font-size:1.5rem;font-weight:900}
+.stat-label{font-size:12px;color:var(--muted)}
+.stat-div{width:1px;height:32px;background:var(--border)}
+@media(max-width:640px){.stat-div{display:none}}
+
+/* Carousel */
+.carousel{position:relative}
+.carousel-main{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 50px rgba(0,0,0,.5);aspect-ratio:16/9;background:var(--bg)}
+.carousel-main img{width:100%;height:100%;object-fit:cover;transition:opacity .5s}
+.carousel-overlay{position:absolute;inset:0;bottom:0;top:auto;height:80px;background:linear-gradient(to top,rgba(0,0,0,.6),transparent)}
+.carousel-label{position:absolute;bottom:16px;left:20px;font-size:14px;font-weight:700;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(30,33,40,.8);backdrop-filter:blur(10px);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;color:var(--fg);font-size:18px;transition:.2s}
+.carousel-btn:hover{transform:translateY(-50%) scale(1.1)}
+.carousel-prev{left:12px}
+.carousel-next{right:12px}
+.carousel-dots{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px}
+.carousel-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;border:0;transition:.2s}
+.carousel-dot.active{width:24px;border-radius:12px;background:var(--primary)}
+.carousel-thumbs{display:flex;gap:8px;margin-top:16px;overflow-x:auto;padding-bottom:8px}
+.carousel-thumb{flex-shrink:0;width:96px;height:56px;border-radius:8px;overflow:hidden;border:2px solid transparent;cursor:pointer;opacity:.6;transition:.2s}
+.carousel-thumb:hover{opacity:1}
+.carousel-thumb.active{border-color:var(--primary);opacity:1;transform:scale(1.05)}
+.carousel-thumb img{width:100%;height:100%;object-fit:cover}
+
+/* Features grid */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.features-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.features-grid{grid-template-columns:1fr}}
+.feature{padding:24px;display:flex;flex-direction:column;height:100%}
+.feature-icon{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;margin-bottom:16px;font-size:20px}
+.feature h3{margin-bottom:8px}
+.feature p{font-size:14px;color:var(--muted);line-height:1.6;flex:1}
+.feature-screens{display:flex;gap:8px;margin-top:16px}
+.feature-thumb{width:80px;height:48px;border-radius:8px;overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:.2s}
+.feature-thumb:hover{border-color:var(--primary);transform:scale(1.05)}
+.feature-thumb img{width:100%;height:100%;object-fit:cover}
+
+/* Lightbox */
+.lightbox{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;padding:16px;cursor:pointer;opacity:0;pointer-events:none;transition:.3s}
+.lightbox.open{opacity:1;pointer-events:auto}
+.lightbox img{max-width:100%;max-height:90vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.6);object-fit:contain}
+.lightbox-close{position:absolute;top:24px;right:24px;width:40px;height:40px;border-radius:50%;background:rgba(30,33,40,.8);backdrop-filter:blur(10px);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;color:var(--fg);font-size:18px;transition:.2s}
+.lightbox-close:hover{transform:scale(1.1)}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;text-align:center}
+@media(max-width:640px){.steps{grid-template-columns:1fr}}
+.step-num{font-size:3rem;font-weight:900;color:var(--primary);opacity:.3;margin-bottom:16px}
+.step-icon{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;margin:0 auto 16px;font-size:22px}
+.step p{font-size:14px;color:var(--muted)}
+
+/* Testimonials */
+.testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:640px){.testimonials{grid-template-columns:1fr}}
+.testimonial{padding:24px;display:flex;flex-direction:column;height:100%}
+.stars{display:flex;gap:4px;margin-bottom:12px;color:var(--primary)}
+.testimonial blockquote{font-size:14px;color:var(--muted);font-style:italic;line-height:1.6;flex:1}
+.testimonial-footer{margin-top:16px;padding-top:12px;border-top:1px solid var(--border)}
+.testimonial-name{font-size:14px;font-weight:700}
+.testimonial-role{font-size:12px;color:var(--muted)}
+
+/* Pricing */
+.pricing{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+@media(max-width:640px){.pricing{grid-template-columns:1fr}}
+.price-card{padding:32px;position:relative;overflow:hidden}
+.price-badge{position:absolute;top:0;right:0;padding:4px 12px;border-radius:0 0 0 12px;font-size:10px;font-weight:700}
+.price-badge.pilot{background:var(--primary);color:#fff}
+.price-badge.betrieb{color:var(--fg)}
+.price-val{font-size:2.5rem;font-weight:900}
+.price-unit{font-size:14px;color:var(--muted)}
+.price-note{font-size:12px;color:var(--primary);margin:4px 0 24px}
+.price-list{list-style:none;margin-bottom:32px}
+.price-list li{display:flex;align-items:flex-start;gap:8px;font-size:14px;color:var(--muted);padding:6px 0}
+.price-list .check{color:var(--primary);flex-shrink:0;margin-top:2px}
+.price-list .check-green{color:var(--success);flex-shrink:0;margin-top:2px}
+.price-btn{display:block;width:100%;text-align:center;padding:12px 24px;border-radius:12px;font-weight:700;transition:.2s}
+.price-btn:hover{transform:scale(1.05)}
+.price-btn.primary{background:linear-gradient(135deg,hsl(20,99%,55%),var(--primary-dark));color:#fff}
+
+/* FAQ */
+details{margin-bottom:8px}
+details summary{padding:16px 24px;cursor:pointer;font-size:14px;font-weight:700;list-style:none;display:flex;align-items:center;justify-content:space-between}
+details summary::after{content:'▼';font-size:10px;color:var(--muted);transition:.2s}
+details[open] summary::after{transform:rotate(180deg)}
+details .faq-answer{padding:0 24px 16px;font-size:14px;color:var(--muted);line-height:1.6}
+
+/* CTA Banner */
+.cta-banner{border-radius:24px;overflow:hidden;padding:clamp(40px,6vw,56px);text-align:center;background:linear-gradient(135deg,hsl(20,99%,55%),hsl(20,80%,40%));position:relative}
+.cta-banner h2,.cta-banner p,.cta-banner a{position:relative;z-index:1}
+.cta-banner h2{color:#fff;margin-bottom:16px}
+.cta-banner p{color:rgba(255,255,255,.8);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
+.cta-glow{position:absolute;inset:0;opacity:.1;background:radial-gradient(circle at 30% 50%,white,transparent 60%)}
+.cta-btns{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px}
+.btn-white{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;border-radius:16px;font-weight:700;background:#fff;color:#111;transition:.2s}
+.btn-white:hover{transform:scale(1.05)}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;border-radius:16px;font-weight:700;border:2px solid rgba(255,255,255,.3);color:#fff;transition:.2s}
+.btn-outline:hover{background:rgba(255,255,255,.1)}
+
+/* Footer */
+footer{border-top:1px solid var(--border);padding:48px 0}
+.footer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-bottom:40px}
+@media(max-width:640px){.footer-grid{grid-template-columns:1fr}}
+.footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+footer h4{font-weight:700;font-size:14px;margin-bottom:12px}
+footer ul{list-style:none}
+footer li{padding:4px 0}
+footer li a{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px;transition:.2s}
+footer li a:hover{color:var(--fg)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.footer-copy{font-size:11px;color:var(--muted)}
+.footer-tagline{font-size:10px;color:rgba(156,163,175,.6)}
+
+/* Animations */
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 20px hsla(20,99%,60%,.15)}50%{box-shadow:0 0 40px hsla(20,99%,60%,.3)}}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* Scrollbar hide */
+.carousel-thumbs::-webkit-scrollbar{display:none}
+.carousel-thumbs{-ms-overflow-style:none;scrollbar-width:none}
+</style>
 </head>
-
 <body>
-  <a class="skip" href="#content">Zum Inhalt</a>
 
-  <header class="topbar">
-    <div class="wrap topbar__inner">
-      <div class="brand">
-        <div class="brand__mark" aria-hidden="true">🖤</div>
-        <div class="brand__text">
-          <div class="brand__name">MiseRebel · Azubi Master</div>
-          <div class="brand__tag">Offline-Paket · Berichtsheft · Prüfung · Ausbilder</div>
-        </div>
-      </div>
+<!-- ═══ NAV ═══ -->
+<nav class="nav" id="nav">
+<div class="nav-inner">
+<div class="nav-brand">
+<div class="glass nav-logo">🖤</div>
+<span style="font-weight:900;font-size:14px">Mise:Rebel™</span>
+</div>
+<div class="nav-links">
+<a href="#features" class="link">Features</a>
+<a href="#pricing" class="link">Preise</a>
+<a href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener noreferrer" class="nav-cta">Jetzt kaufen</a>
+</div>
+</div>
+</nav>
 
-      <nav class="topnav" aria-label="Navigation">
-        <a href="#features">Features</a>
-        <a href="#hybrid">Hybrid</a>
-        <a href="#screens">Screens</a>
-        <a href="#offline">Offline</a>
-        <a href="#setup">Start</a>
-        <a href="#faq">FAQ</a>
-      </nav>
-
-      <div class="topbar__cta">
-        <a class="btn btn--ghost" href="#setup">So startest du</a>
-        <a class="btn btn--primary" href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener">Download im Shop</a>
-      </div>
-    </div>
-  </header>
-
-  <main id="content">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="wrap hero__grid">
-        <div class="hero__copy">
-          <div class="pill">🖤 Hybrid: gehostet nutzbar · Offline-fähig · DE/EN/FR · Azubi + Ausbilder</div>
-
-          <h1>
-            Ein Berichtsheft, das nicht nervt.
-            <span class="h1__accent">Und eine Prüfung, die nicht überrascht.</span>
-          </h1>
-
-          <p class="lead">
-            <strong>MiseRebel · Azubi Master</strong> ist dein <strong>Hybrid-System</strong> fürs Gastgewerbe:
-            <strong>gehostet sofort nutzbar</strong> (Hybrid) <em>oder</em> als <strong>Offline-Paket</strong>.
-            Dazu: digitales <strong>Berichtsheft</strong> mit <strong>Unterschriften</strong> & <strong>PDF-Export</strong>,
-            plus <strong>AP1/AP2-Training</strong>, Quiz, Glossar, Warenkunde und ein Ausbilder-Dashboard.
-          </p>
-
-          <div class="hero__bullets">
-            <div class="bullet"><span class="dot"></span><span><strong>Berichtsheft</strong> (Tag/Woche/Archiv) + Wochenabgabe</span></div>
-            <div class="bullet"><span class="dot"></span><span><strong>Unterschriften</strong> (Azubi + Ausbilder) + <strong>PDF teilen</strong></span></div>
-            <div class="bullet"><span class="dot"></span><span><strong>AP1 & AP2</strong> Training + Quiz</span></div>
-            <div class="bullet"><span class="dot"></span><span><strong>Offline-First</strong> mit Sync-Warteschlange & Status</span></div>
-          </div>
-
-          <div class="hero__actions">
-            <a class="btn btn--primary" href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener">Jetzt sichern</a>
-            <button class="btn btn--ghost" type="button" data-scroll="#features">Zeig mir die Features</button>
-          </div>
-
-          <div class="micro">
-            Hybrid-Option: Du kannst das System auch <strong>gehostet</strong> nutzen (ohne lokalen Start). Offline bleibt zusätzlich möglich.
-            Hinweis: Der erste Login benötigt Internet. Danach funktioniert die App auch offline (außer Login selbst).
-          </div>
-        </div>
-
-        <aside class="hero__card" aria-label="Kurzüberblick">
-          <div class="glass">
-            <div class="glass__head">
-              <div class="glass__title">Was du bekommst</div>
-              <div class="glass__badge">Offline-Paket</div>
-            </div>
-
-            <div class="glass__list">
-              <div class="row">
-                <div class="k">Zielgruppe</div>
-                <div class="v">Azubis + Ausbilder (Gastgewerbe)</div>
-              </div>
-              <div class="row">
-                <div class="k">Inhalte</div>
-                <div class="v">Berichtsheft · AP1 · AP2 · Quiz · Glossar · Warenkunde</div>
-              </div>
-              <div class="row">
-                <div class="k">Sprachen</div>
-                <div class="v">DE · EN · FR</div>
-              </div>
-              <div class="row">
-                <div class="k">Export</div>
-                <div class="v">PDF · CSV/JSON</div>
-              </div>
-              <div class="row">
-                <div class="k">Offline</div>
-                <div class="v">Lokale Speicherung + Sync-Queue</div>
-              </div>
-              <div class="row">
-                <div class="k">Hybrid</div>
-                <div class="v">Gehostet nutzbar (optional)</div>
-              </div>
-              <div class="row">
-                <div class="k">Support</div>
-                <div class="v"><a href="mailto:rebelle.media.creator@gmail.com">rebelle.media.creator@gmail.com</a></div>
-              </div>
-            </div>
-
-            <div class="glass__note">
-              <strong>Für Betriebe:</strong> Ausbilder-Dashboard mit Zuweisung, Notizen, Lehrstoff & Gegenzeichnung.
-            </div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- HYBRID -->
-    <section id="hybrid" class="section">
-      <div class="wrap">
-        <div class="section__head">
-          <h2>Hybrid verkauft besser. Weil Betriebe Auswahl wollen.</h2>
-          <p class="section__sub">
-            Manche wollen sofort starten (gehostet). Andere wollen Offline (ZIP). Du bietest beides – ohne dass es nach Kompromiss aussieht.
-          </p>
-        </div>
-
-        <div class="two">
-          <div class="card card--soft">
-            <h3>Option A: Gehostet nutzbar (Hybrid)</h3>
-            <ul>
-              <li>Sofort loslegen – kein lokaler Start, kein Installations-Drama</li>
-              <li>Ideal für Betriebe, die „einfach funktionieren“ wollen</li>
-              <li>Perfekt für Pilot & Rollout</li>
-            </ul>
-            <div class="hero__actions" style="margin-top:12px">
-              <a class="btn btn--primary" href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener">Hybrid im Shop öffnen</a>
-            </div>
-          </div>
-
-          <div class="card card--soft">
-            <h3>Option B: Offline-Paket (ZIP)</h3>
-            <ul>
-              <li>Läuft auch ohne WLAN – Einträge werden lokal gespeichert</li>
-              <li>Sync später automatisch (Status sichtbar)</li>
-              <li>Ideal für Schulungen, Keller-WLAN und „Realität“</li>
-            </ul>
-            <div class="hero__actions" style="margin-top:12px">
-              <a class="btn btn--ghost" href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener">Offline-Paket im Shop</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="ctaBand" style="margin-top:16px">
-          <div>
-            <div class="ctaBand__title">Ein Link. Zwei Nutzungswege. Mehr Abschlüsse.</div>
-            <div class="ctaBand__sub">Du nimmst Betrieben die Entscheidungslast ab – und gibst ihnen trotzdem Kontrolle.</div>
-          </div>
-          <a class="btn btn--primary" href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener">Jetzt sichern</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- TRUST STRIP -->
-    <section class="strip">
-      <div class="wrap strip__grid">
-        <div class="strip__item">
-          <div class="strip__icon">📎</div>
-          <div class="strip__text">
-            <div class="strip__title">Weniger Chaos</div>
-            <div class="strip__desc">Ein Ort für Bericht, Wissen & Prüfung.</div>
-          </div>
-        </div>
-        <div class="strip__item">
-          <div class="strip__icon">🖤</div>
-          <div class="strip__text">
-            <div class="strip__title">Mehr Ruhe</div>
-            <div class="strip__desc">Offline arbeiten, später automatisch syncen.</div>
-          </div>
-        </div>
-        <div class="strip__item">
-          <div class="strip__icon">📎</div>
-          <div class="strip__text">
-            <div class="strip__title">Mehr Nachweis</div>
-            <div class="strip__desc">PDF-Export + Unterschriften + Archiv.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FEATURES -->
-    <section id="features" class="section">
-      <div class="wrap">
-        <div class="section__head">
-          <h2>Features, die im Alltag wirklich ziehen.</h2>
-          <p class="section__sub">
-            Nicht “noch eine App”. Sondern ein System, das Azubis führt – und Ausbilder entlastet.
-          </p>
-        </div>
-
-        <div class="grid">
-          <article class="card">
-            <h3>Berichtsheft</h3>
-            <ul>
-              <li>Tageseinträge + Wochenübersicht (Mo–Fr)</li>
-              <li>Wochenabgabe + Archiv über Ausbildungsjahre</li>
-              <li>Signatur-Flow: Azubi unterschreibt, Ausbilder gegenzeichnet</li>
-              <li>PDF: Drucken, Download, Teilen</li>
-              <li>Export zusätzlich als CSV/JSON</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3>Prüfung & Training</h3>
-            <ul>
-              <li>AP1-Bereich + AP2-Bereich getrennt</li>
-              <li>Lernquiz + Statistiken/Score-Logik</li>
-              <li>Wiederholen statt raten</li>
-              <li>Training im Betrieb & zuhause</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3>Wissen</h3>
-            <ul>
-              <li>Glossar zum schnellen Nachschlagen</li>
-              <li>Warenkunde-Bereich</li>
-              <li>“Mein Lehrstoff” – Inhalte vom Ausbilder</li>
-              <li>Badge-Hinweise auf neue Inhalte</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3>Ausbilder-Dashboard</h3>
-            <ul>
-              <li>Azubis zuweisen und Berichtshefte einsehen</li>
-              <li>Notizen senden (ohne WhatsApp-Chaos)</li>
-              <li>Lehrstoff bereitstellen</li>
-              <li>Gegenzeichnung + PDF-Sicherung</li>
-              <li>KI-Nutzung einsehbar</li>
-            </ul>
-            <div class="note">
-              In diesem Build ist die Zuweisung technisch auf <strong>2 Azubis</strong> begrenzt (Pilot-/Demo-Logik).
-            </div>
-          </article>
-        </div>
-
-        <div class="ctaBand">
-          <div>
-            <div class="ctaBand__title">Du willst, dass Betriebe das ernst nehmen?</div>
-            <div class="ctaBand__sub">Dann verkaufst du nicht Software. Du verkaufst Nachweis, Klarheit, Routine.</div>
-          </div>
-          <a class="btn btn--primary" href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener">Download im Shop</a>
-        </div>
-      </div>
-    
-    <!-- SCREENS -->
-    <section id="screens" class="section">
-      <div class="wrap">
-        <div class="section__head">
-          <h2>So sieht’s aus. So fühlt’s sich an.</h2>
-          <p class="section__sub">
-            Keine Theorie. Hier sind echte Screens aus dem System – Berichtsheft, Training, Sync und Ausbilder-Ansicht.
-            Tipp: Antippen/Anklicken öffnet groß.
-          </p>
-        </div>
-
-        <div class="screenGrid" data-lightbox>
-          <figure class="screen">
-            <button class="screen__btn" type="button" data-img="assets/screens/login.png" aria-label="Login Screen groß anzeigen">
-              <img src="assets/screens/login.png" alt="Login – MiseRebel Azubi Master" loading="lazy" />
-            </button>
-            <figcaption>Login (erster Start online)</figcaption>
-          </figure>
-
-          <figure class="screen">
-            <button class="screen__btn" type="button" data-img="assets/screens/berichtsheft_oben.png" aria-label="Berichtsheft Screen groß anzeigen">
-              <img src="assets/screens/berichtsheft_oben.png" alt="Berichtsheft – Wochenübersicht" loading="lazy" />
-            </button>
-            <figcaption>Berichtsheft (Woche)</figcaption>
-          </figure>
-
-          <figure class="screen">
-            <button class="screen__btn" type="button" data-img="assets/screens/ap_simulator.png" aria-label="AP Simulator Screen groß anzeigen">
-              <img src="assets/screens/ap_simulator.png" alt="AP1/AP2 Training – Simulator" loading="lazy" />
-            </button>
-            <figcaption>AP1/AP2 Training</figcaption>
-          </figure>
-
-          <figure class="screen">
-            <button class="screen__btn" type="button" data-img="assets/screens/quiz.png" aria-label="Quiz Screen groß anzeigen">
-              <img src="assets/screens/quiz.png" alt="Quiz – Lerntraining" loading="lazy" />
-            </button>
-            <figcaption>Quiz (Lerntraining)</figcaption>
-          </figure>
-
-          <figure class="screen">
-            <button class="screen__btn" type="button" data-img="assets/screens/warenkunde.png" aria-label="Warenkunde Screen groß anzeigen">
-              <img src="assets/screens/warenkunde.png" alt="Warenkunde – Nachschlagen" loading="lazy" />
-            </button>
-            <figcaption>Warenkunde</figcaption>
-          </figure>
-
-          <figure class="screen">
-            <button class="screen__btn" type="button" data-img="assets/screens/lehrstoff.png" aria-label="Lehrstoff Screen groß anzeigen">
-              <img src="assets/screens/lehrstoff.png" alt="Lehrstoff – Inhalte vom Ausbilder" loading="lazy" />
-            </button>
-            <figcaption>Lehrstoff vom Ausbilder</figcaption>
-          </figure>
-
-          <figure class="screen">
-            <button class="screen__btn" type="button" data-img="assets/screens/sync.png" aria-label="Sync Screen groß anzeigen">
-              <img src="assets/screens/sync.png" alt="Sync – Offline Warteschlange" loading="lazy" />
-            </button>
-            <figcaption>Offline-Sync & Status</figcaption>
-          </figure>
-
-          <figure class="screen">
-            <button class="screen__btn" type="button" data-img="assets/screens/10info_status.png" aria-label="Info Status Screen groß anzeigen">
-              <img src="assets/screens/10info_status.png" alt="Info & Status – Übersicht" loading="lazy" />
-            </button>
-            <figcaption>Info & Status</figcaption>
-          </figure>
-        </div>
-
-        <div class="ctaBand">
-          <div>
-            <div class="ctaBand__title">Wenn das so aussehen soll – dann hol’s dir nicht „irgendwann“.</div>
-            <div class="ctaBand__sub">Du bekommst das komplette Offline-Paket inkl. Ausbilder-Dashboard als Download im Shop.</div>
-          </div>
-          <a class="btn btn--primary" href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener">Zum Produkt</a>
-        </div>
-      </div>
-    </section>
+<!-- ═══ HERO ═══ -->
+<section class="hero" style="padding-left:16px;padding-right:16px">
+<div class="glow1"></div>
+<div class="glow2"></div>
+<div style="max-width:860px;margin:0 auto;position:relative;z-index:1">
+<div class="glass hero-badge fade-in">✨ Neu: AP1 &amp; AP2 mit IHK-Kompetenzmatrix</div>
+<h1 class="fade-in">Dein digitaler<br><span class="hero-accent">Ausbildungs&shy;begleiter</span></h1>
+<p class="hero-sub fade-in">Berichtsheft, Prüfungsvorbereitung, Lernquiz und KI-Coach – alles in einer App. Für <strong>Azubis</strong> und <strong>Ausbilder</strong> im Gastgewerbe.</p>
+<div class="hero-ctas fade-in">
+<a href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener noreferrer" class="btn-primary">Jetzt kaufen →</a>
+<a href="#features" class="glass btn-secondary">Features entdecken ▾</a>
+</div>
+<div class="berufe fade-in">
+<span class="glass beruf">🧑‍🍳 Koch / Köchin</span>
+<span class="glass beruf">👥 Restaurantfachmann/-frau</span>
+<span class="glass beruf">⭐ Hotelfachmann/-frau</span>
+<span class="glass beruf">❤️ Fachkraft im Gastgewerbe</span>
+<span class="glass beruf">📊 Systemgastronomie</span>
+</div>
+</div>
 </section>
 
-    <!-- OFFLINE -->
-    <section id="offline" class="section section--alt">
-      <div class="wrap">
-        <div class="section__head">
-          <h2>Offline-First. Weil Realität nicht immer WLAN hat.</h2>
-          <p class="section__sub">
-            Einträge werden lokal gespeichert und später synchronisiert. Du siehst jederzeit den Sync-Status.
-          </p>
-        </div>
+<!-- ═══ STATS ═══ -->
+<section class="stats">
+<div class="stats-inner max-w">
+<div><div class="stat-val">474+</div><div class="stat-label">Prüfungsfragen</div></div>
+<div class="stat-div"></div>
+<div><div class="stat-val">5</div><div class="stat-label">Ausbildungsberufe</div></div>
+<div class="stat-div"></div>
+<div><div class="stat-val">3</div><div class="stat-label">Sprachen</div></div>
+<div class="stat-div"></div>
+<div><div class="stat-val">100%</div><div class="stat-label">Offline-fähig</div></div>
+<div class="stat-div"></div>
+<div><div class="stat-val">AO 2022</div><div class="stat-label">Konform</div></div>
+</div>
+</section>
 
-        <div class="two">
-          <div class="card card--soft">
-            <h3>So funktioniert’s</h3>
-            <ol>
-              <li>Erster Login online.</li>
-              <li>Danach: Berichtsheft & Training auch ohne Internet.</li>
-              <li>Alles landet in einer Sync-Warteschlange.</li>
-              <li>Sobald wieder online: automatische Synchronisation.</li>
-            </ol>
-          </div>
+<!-- ═══ SCREENSHOT GALLERY ═══ -->
+<section style="padding:80px 16px;overflow:hidden">
+<div class="max-w">
+<div class="fade-in" style="text-align:center;margin-bottom:40px">
+<h2>So sieht's aus</h2>
+<p style="color:var(--muted);max-width:480px;margin:16px auto 0">Einblicke in die App – vom Berichtsheft bis zum Ausbilder-Dashboard.</p>
+</div>
+<div class="carousel fade-in" id="carousel">
+<div class="carousel-main">
+<img id="carousel-img" src="screenshots/hero-brand.jpg" alt="">
+<div class="carousel-overlay"></div>
+<p class="carousel-label" id="carousel-label"></p>
+</div>
+<button class="carousel-btn carousel-prev" onclick="carouselPrev()" aria-label="Vorheriges Bild">‹</button>
+<button class="carousel-btn carousel-next" onclick="carouselNext()" aria-label="Nächstes Bild">›</button>
+<div class="carousel-dots" id="carousel-dots"></div>
+<div class="carousel-thumbs" id="carousel-thumbs"></div>
+</div>
+</div>
+</section>
 
-          <div class="card card--soft">
-            <h3>Wichtig</h3>
-            <ul>
-              <li><strong>Website-Daten nicht löschen</strong>, solange der Sync-Zähler &gt; 0 ist.</li>
-              <li>Sync-Status ist in der App sichtbar (Tab “Sync” + “Info & Status”).</li>
-              <li>PDF-Export funktioniert im Browser, “Teilen” je nach Gerät.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
+<!-- ═══ FEATURES ═══ -->
+<section id="features" style="padding:80px 16px">
+<div class="max-w">
+<div class="fade-in" style="text-align:center;margin-bottom:56px">
+<h2>Alles, was du brauchst</h2>
+<p style="color:var(--muted);max-width:480px;margin:16px auto 0">Eine Plattform – vom ersten Ausbildungstag bis zur Abschlussprüfung.</p>
+</div>
+<div class="features-grid" id="features-grid"></div>
+</div>
+</section>
 
-    <!-- SETUP -->
-    <section id="setup" class="section">
-      <div class="wrap">
-        <div class="section__head">
-          <h2>Start in 3 Minuten (Windows/Mac)</h2>
-          <p class="section__sub">Du entpackst, startest – und arbeitest im Browser.</p>
-        </div>
+<!-- ═══ HOW IT WORKS ═══ -->
+<section style="padding:80px 16px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+<div class="max-w-sm">
+<h2 class="fade-in" style="text-align:center;margin-bottom:56px">So funktioniert's</h2>
+<div class="steps">
+<div class="fade-in" style="text-align:center">
+<div class="step-num">01</div>
+<div class="glass step-icon btn-glow">👥</div>
+<h3>Registrieren</h3>
+<p>Konto erstellen – Azubi oder Ausbilder. Betriebsnummer eingeben und loslegen.</p>
+</div>
+<div class="fade-in" style="text-align:center">
+<div class="step-num">02</div>
+<div class="glass step-icon btn-glow">📖</div>
+<h3>Lernen & Dokumentieren</h3>
+<p>Berichtsheft schreiben, Quiz absolvieren, Prüfungen simulieren – alles an einem Ort.</p>
+</div>
+<div class="fade-in" style="text-align:center">
+<div class="step-num">03</div>
+<div class="glass step-icon btn-glow">🎓</div>
+<h3>Prüfung bestehen</h3>
+<p>Mit Kompetenzmatrix und Schwächentraining gezielt auf AP1 &amp; AP2 vorbereiten.</p>
+</div>
+</div>
+</div>
+</section>
 
-        <div class="grid grid--3">
-          <article class="card">
-            <h3>1) Entpacken</h3>
-            <p>ZIP komplett entpacken (ganzer Ordner, keine Einzeldateien).</p>
-          </article>
+<!-- ═══ TESTIMONIALS ═══ -->
+<section style="padding:80px 16px">
+<div class="max-w">
+<h2 class="fade-in" style="text-align:center;margin-bottom:56px">Was andere sagen</h2>
+<div class="testimonials">
+<div class="glass testimonial fade-in">
+<div class="stars">★★★★★</div>
+<blockquote>„Endlich ein Berichtsheft, das man gerne schreibt. Die Vorschläge sparen mir jeden Tag 15 Minuten."</blockquote>
+<div class="testimonial-footer">
+<div class="testimonial-name">Lukas M.</div>
+<div class="testimonial-role">Koch-Azubi, 2. Lehrjahr</div>
+</div>
+</div>
+<div class="glass testimonial fade-in">
+<div class="stars">★★★★★</div>
+<blockquote>„Als Ausbilder habe ich jetzt den vollen Überblick über alle meine Azubis – Prüfungsergebnisse, Berichte, alles."</blockquote>
+<div class="testimonial-footer">
+<div class="testimonial-name">Sandra K.</div>
+<div class="testimonial-role">Küchenchefin &amp; Ausbilderin</div>
+</div>
+</div>
+<div class="glass testimonial fade-in">
+<div class="stars">★★★★★</div>
+<blockquote>„Das Quiz-System mit XP und Badges macht süchtig. Meine AP1-Simulation war dann fast zu einfach!"</blockquote>
+<div class="testimonial-footer">
+<div class="testimonial-name">Mehmet A.</div>
+<div class="testimonial-role">ReFa-Azubi, 3. Lehrjahr</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-          <article class="card">
-            <h3>2) Starten</h3>
-            <p>
-              Windows: <strong>START_WINDOWS.cmd</strong><br />
-              Mac: <strong>START_MAC.command</strong>
-            </p>
-            <p class="small">Voraussetzung: Node.js oder Python installiert.</p>
-          </article>
+<!-- ═══ PRICING ═══ -->
+<section id="pricing" style="padding:80px 16px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+<div class="max-w-sm">
+<div class="fade-in" style="text-align:center;margin-bottom:56px">
+<h2>Transparent &amp; fair</h2>
+<p style="color:var(--muted);margin-top:16px">Einmalige Lizenz – keine versteckten Kosten, keine Abos.</p>
+</div>
+<div class="pricing">
+<div class="glass price-card fade-in">
+<div class="price-badge pilot">PILOT-ANGEBOT</div>
+<h3>Pilot-Lizenz</h3>
+<div style="margin:8px 0 4px"><span class="price-val">520 €</span> <span class="price-unit">einmalig</span></div>
+<div class="price-note">300 € werden auf die Volllizenz angerechnet</div>
+<ul class="price-list">
+<li><span class="check">✓</span> Alle Features inklusive</li>
+<li><span class="check">✓</span> Bis zu 20 Azubi-Accounts</li>
+<li><span class="check">✓</span> Ausbilder-Dashboard</li>
+<li><span class="check">✓</span> Offline-Desktop-App</li>
+<li><span class="check">✓</span> E-Mail-Support</li>
+<li><span class="check">✓</span> Kostenlose Updates im Pilotzeitraum</li>
+</ul>
+<a href="mailto:rebelle.media.creator@gmail.com?subject=Mise:Rebel™ Pilot-Lizenz Anfrage" class="price-btn primary">Pilot-Zugang anfragen</a>
+</div>
+<div class="glass price-card fade-in" style="border:1px solid hsla(20,99%,60%,.3)">
+<div class="price-badge betrieb btn-success-glow">BETRIEB</div>
+<h3>Betriebs-Lizenz</h3>
+<div style="margin:8px 0 4px"><span class="price-val">Individuell</span></div>
+<div class="price-note" style="color:var(--muted)">Maßgeschneidert für Ihren Betrieb</div>
+<ul class="price-list">
+<li><span class="check-green">✓</span> Unbegrenzte Azubi-Accounts</li>
+<li><span class="check-green">✓</span> Mehrere Ausbilder-Zugänge</li>
+<li><span class="check-green">✓</span> Eigene Betriebsrezepte &amp; Lehrpläne</li>
+<li><span class="check-green">✓</span> White-Label-Option</li>
+<li><span class="check-green">✓</span> Prioritäts-Support</li>
+<li><span class="check-green">✓</span> Individuelle Anpassungen</li>
+</ul>
+<a href="mailto:rebelle.media.creator@gmail.com?subject=Mise:Rebel™ Betriebs-Lizenz Anfrage" class="glass price-btn">Angebot anfordern</a>
+</div>
+</div>
+</div>
+</section>
 
-          <article class="card">
-            <h3>3) Login</h3>
-            <p>Erster Login online. Danach läuft die App offline weiter.</p>
-          </article>
-        </div>
+<!-- ═══ FAQ ═══ -->
+<section style="padding:80px 16px">
+<div class="max-w-md">
+<h2 class="fade-in" style="text-align:center;margin-bottom:56px">Häufige Fragen</h2>
+<details class="glass fade-in"><summary>Funktioniert die App auch offline?</summary><div class="faq-answer">Ja! Mise:Rebel™ ist eine PWA mit voller Offline-Funktionalität. Zusätzlich bieten wir eine native Desktop-App für Windows, macOS und Linux.</div></details>
+<details class="glass fade-in"><summary>Ist das Berichtsheft IHK-konform?</summary><div class="faq-answer">Die Software orientiert sich an der KochAusbV 2022 und bietet alle Felder, die für den Ausbildungsnachweis benötigt werden. Der Export erfolgt als PDF.</div></details>
+<details class="glass fade-in"><summary>Welche Ausbildungsberufe werden unterstützt?</summary><div class="faq-answer">Koch/Köchin, Restaurantfachmann/-frau, Hotelfachmann/-frau, Fachkraft im Gastgewerbe und Fachmann/-frau für Systemgastronomie.</div></details>
+<details class="glass fade-in"><summary>Können mehrere Ausbilder auf einen Betrieb zugreifen?</summary><div class="faq-answer">Ja, mit der Betriebs-Lizenz können mehrere Ausbilder-Accounts angelegt und Azubis zugewiesen werden.</div></details>
+<details class="glass fade-in"><summary>Wie sicher sind meine Daten?</summary><div class="faq-answer">Alle Daten werden verschlüsselt auf EU-Servern gespeichert. Digitale Signaturen nutzen SHA-256-Hashing. DSGVO-konform.</div></details>
+</div>
+</section>
 
-        <div class="callout">
-          <div class="callout__left">
-            <div class="callout__title">Für Ausbilder & Betriebe</div>
-            <div class="callout__sub">
-              Zuweisung → Wochenprüfung → Gegenzeichnung → PDF-Sicherung. Fertig.
-            </div>
-          </div>
-          <a class="btn btn--primary" href="mailto:rebelle.media.creator@gmail.com">Setup-Support anfragen</a>
-        </div>
-      </div>
-    </section>
+<!-- ═══ CTA ═══ -->
+<section style="padding:80px 16px">
+<div class="max-w-md">
+<div class="cta-banner fade-in">
+<div class="cta-glow"></div>
+<h2>Bereit durchzustarten?</h2>
+<p>Sichere dir jetzt Mise:Rebel™ und erlebe, wie einfach Ausbildung digital sein kann.</p>
+<div class="cta-btns">
+<a href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener noreferrer" class="btn-white">Jetzt kaufen →</a>
+<a href="mailto:rebelle.media.creator@gmail.com?subject=Mise:Rebel™ Demo anfragen" class="btn-outline">✉ Demo anfragen</a>
+</div>
+</div>
+</div>
+</section>
 
-    <!-- FAQ -->
-    <section id="faq" class="section section--alt">
-      <div class="wrap">
-        <div class="section__head">
-          <h2>FAQ</h2>
-          <p class="section__sub">Kurz. Klar. Ohne Ausreden.</p>
-        </div>
+<!-- ═══ FOOTER ═══ -->
+<footer>
+<div class="max-w">
+<div class="footer-grid">
+<div>
+<div class="footer-brand">
+<div class="glass" style="width:36px;height:36px;border-radius:12px;display:grid;place-items:center;font-size:18px">🖤</div>
+<div>
+<div style="font-weight:900;font-size:14px">Mise:Rebel™</div>
+<div style="font-size:10px;color:var(--muted)">by RE:BELLE™ Media</div>
+</div>
+</div>
+<p style="font-size:12px;font-style:italic;color:var(--muted);margin-bottom:12px">The Art of Feeling. Amplified.</p>
+<p style="font-size:12px;color:var(--muted);line-height:1.6">Tina Schlesier<br>Nordstr. 5<br>09212 Limbach-Oberfrohna</p>
+</div>
+<div>
+<h4>Links</h4>
+<ul>
+<li><a href="https://portfolio.rebellemedia.de" target="_blank" rel="noopener noreferrer">🌐 portfolio.rebellemedia.de</a></li>
+<li><a href="https://newwomanintheshop.com" target="_blank" rel="noopener noreferrer">🌐 newwomanintheshop.com</a></li>
+<li><a href="https://rebellemedia.de" target="_blank" rel="noopener noreferrer">🌐 rebellemedia.de</a></li>
+<li><a href="https://feel.rebellemedia.de" target="_blank" rel="noopener noreferrer">❤️ feel.rebellemedia.de</a></li>
+</ul>
+</div>
+<div>
+<h4>Kontakt &amp; Rechtliches</h4>
+<ul>
+<li><a href="mailto:rebelle.media.creator@gmail.com">✉ rebelle.media.creator@gmail.com</a></li>
+<li><a href="https://rebellemedia.de/agb" target="_blank" rel="noopener noreferrer">📄 AGB</a></li>
+<li><a href="https://rebellemedia.de/datenschutz" target="_blank" rel="noopener noreferrer">🛡 Datenschutz</a></li>
+<li><a href="https://rebellemedia.de/impressum" target="_blank" rel="noopener noreferrer">📄 Impressum</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p class="footer-copy">© 2025 Mise:Rebel™ by RE:BELLE™ Media. Alle Rechte vorbehalten.</p>
+<p class="footer-tagline">🖤 The Art of Feeling. Amplified.</p>
+</div>
+</div>
+</footer>
 
-        <div class="faq" data-accordion>
-          <button class="faq__q" aria-expanded="false">
-            Brauche ich eine Installation?
-            <span class="faq__icon" aria-hidden="true">+</span>
-          </button>
-          <div class="faq__a" hidden>
-            Nein. Du arbeitest im Browser. Für den Offline-Start wird ein kleiner lokaler Server genutzt, damit der file://-Modus nicht blockt.
-          </div>
+<!-- ═══ LIGHTBOX ═══ -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+<img id="lightbox-img" src="" alt="">
+<button class="lightbox-close" onclick="closeLightbox()">✕</button>
+</div>
 
-          <button class="faq__q" aria-expanded="false">
-            Funktioniert das ohne Internet?
-            <span class="faq__icon" aria-hidden="true">+</span>
-          </button>
-          <div class="faq__a" hidden>
-            Nach dem ersten Login: ja. Einträge werden lokal gespeichert und später automatisch synchronisiert (Status in der App).
-          </div>
+<script>
+/* ── Screenshot data ── */
+var SCREENSHOTS=[
+{src:'screenshots/hero-brand.jpg',label:'Mise:Rebel™ – Deine Lernplattform'},
+{src:'screenshots/berichtsheft.jpg',label:'Digitales Berichtsheft'},
+{src:'screenshots/berichtsheft-form.jpg',label:'Tagesbericht mit Vorschlägen'},
+{src:'screenshots/rahmenplan.jpg',label:'Ausbildungsrahmenplan (AO 2022)'},
+{src:'screenshots/glossar.jpg',label:'Glossar – 1.986 Fachbegriffe'},
+{src:'screenshots/warenkunde.jpg',label:'Saisonale Warenkunde'},
+{src:'screenshots/lernquiz.jpg',label:'Lernquiz mit Spaced Repetition'},
+{src:'screenshots/ap1-pruefung.jpg',label:'AP1 Prüfungssimulation'},
+{src:'screenshots/ap2-pruefung.jpg',label:'AP2 Prüfungssimulation'},
+{src:'screenshots/lernmodule.jpg',label:'Interaktive Lernmodule'},
+{src:'screenshots/rezeptbuch.jpg',label:'Rezeptbuch nach Lehrjahr'},
+{src:'screenshots/ausbilder-dashboard.jpg',label:'Ausbilder Dashboard'},
+{src:'screenshots/rezeptverwaltung.jpg',label:'Rezeptverwaltung (Ausbilder)'},
+{src:'screenshots/nachrichten.jpg',label:'Nachrichten-System'},
+{src:'screenshots/access-gate.jpg',label:'Geschützter Zugang'},
+{src:'screenshots/login-selection.jpg',label:'Login & Registrierung'},
+{src:'screenshots/login-form.jpg',label:'Anmeldung'},
+{src:'screenshots/info-status.jpg',label:'Info & Synchronisation'},
+{src:'screenshots/ki-coach.jpg',label:'KI-Ausbildungscoach'},
+{src:'screenshots/sync.jpg',label:'Offline-Synchronisation'},
+{src:'screenshots/einstellungen.jpg',label:'Profil & Einstellungen'},
+{src:'screenshots/cloud-2fa.jpg',label:'Cloud & 2-Faktor-Auth'},
+{src:'screenshots/rechtliches.jpg',label:'Rechtliche Hinweise & Datenschutz'}
+];
 
-          <button class="faq__q" aria-expanded="false">
-            Kann ich das auch gehostet nutzen (Hybrid)?
-            <span class="faq__icon" aria-hidden="true">+</span>
-          </button>
-          <div class="faq__a" hidden>
-            Ja. Neben dem Offline-Paket gibt es eine Hybrid-Option: gehostet nutzbar, ohne lokalen Start. Offline bleibt zusätzlich möglich.
-          </div>
+var FEATURES=[
+{icon:'📄',title:'Digitales Berichtsheft',desc:'Tages- & Wochenberichte mit Auto-Vorschlägen, PDF-Export und IHK-konformer Struktur nach KochAusbV 2022.',screens:['screenshots/berichtsheft.jpg','screenshots/berichtsheft-form.jpg']},
+{icon:'🎓',title:'AP1 & AP2 Prüfungssimulation',desc:'474+ Fragen, IHK-Kompetenzmatrix, Schwächentraining und detaillierte Ergebnisanalyse nach AO 2022.',screens:['screenshots/ap1-pruefung.jpg','screenshots/ap2-pruefung.jpg']},
+{icon:'🧠',title:'Lernquiz mit Gamification',desc:'XP-System, Streak-Boni, Badges und Spaced Repetition für nachhaltiges Lernen.',screens:['screenshots/lernquiz.jpg']},
+{icon:'📖',title:'Glossar (DE/EN/FR)',desc:'Dreisprachiges Fachglossar mit über 500 Begriffen aus dem Gastgewerbe.',screens:['screenshots/glossar.jpg']},
+{icon:'🤖',title:'KI-Lernhilfe',desc:'Persönlicher Koch-Coach mit künstlicher Intelligenz – erklärt, übt und motiviert.',screens:['screenshots/ki-coach.jpg']},
+{icon:'🛡',title:'Ausbilder-Dashboard',desc:'Überblick über alle Azubis: Berichtshefte, Prüfungsergebnisse, Kompetenzfortschritt und Nachrichten.',screens:['screenshots/ausbilder-dashboard.jpg','screenshots/rezeptverwaltung.jpg']},
+{icon:'🥕',title:'Warenkunde',desc:'Interaktive Warenkunde mit Bildern, Saisonkalender und Fachbegriffen.',screens:['screenshots/warenkunde.jpg']},
+{icon:'📚',title:'Rahmenplan-Tracking',desc:'Vollständiger Ausbildungsrahmenplan mit Fortschrittsverfolgung und betrieblicher Zuordnung.',screens:['screenshots/rahmenplan.jpg']},
+{icon:'🧑‍🍳',title:'Rezeptbuch',desc:'Digitale Rezeptsammlung mit Kalkulation, Portionierung und Ausbilder-Zuweisungen.',screens:['screenshots/rezeptbuch.jpg']},
+{icon:'💬',title:'Nachrichten',desc:'Direkter Kanal zwischen Azubi und Ausbilder – im Betrieb und unterwegs.',screens:['screenshots/nachrichten.jpg']},
+{icon:'🔒',title:'E-Signatur & Audit',desc:'SHA-256-gesicherte digitale Unterschriften mit lückenloser Änderungshistorie.',screens:['screenshots/cloud-2fa.jpg']},
+{icon:'📱',title:'Offline & Desktop',desc:'Vollständig offline-fähig als PWA und native Desktop-App (Windows, macOS, Linux).',screens:['screenshots/sync.jpg','screenshots/einstellungen.jpg']}
+];
 
-          <button class="faq__q" aria-expanded="false">
-            Kann ich Berichtshefte als PDF abgeben?
-            <span class="faq__icon" aria-hidden="true">+</span>
-          </button>
-          <div class="faq__a" hidden>
-            Ja. Druckansicht + PDF-Download sind integriert. Je nach Gerät kannst du das PDF direkt teilen.
-          </div>
+/* ── Carousel ── */
+var ci=0,autoPlay;
+function renderCarousel(){
+var img=document.getElementById('carousel-img');
+var label=document.getElementById('carousel-label');
+img.src=SCREENSHOTS[ci].src;img.alt=SCREENSHOTS[ci].label;
+label.textContent=SCREENSHOTS[ci].label;
+document.querySelectorAll('.carousel-dot').forEach(function(d,i){d.className='carousel-dot'+(i===ci?' active':'')});
+document.querySelectorAll('.carousel-thumb').forEach(function(d,i){d.className='carousel-thumb'+(i===ci?' active':'')});
+}
+function carouselNext(){ci=(ci+1)%SCREENSHOTS.length;renderCarousel()}
+function carouselPrev(){ci=(ci-1+SCREENSHOTS.length)%SCREENSHOTS.length;renderCarousel()}
+function carouselGo(i){ci=i;renderCarousel()}
+function startAuto(){autoPlay=setInterval(carouselNext,4000)}
+function stopAuto(){clearInterval(autoPlay)}
 
-          <button class="faq__q" aria-expanded="false">
-            Was ist mit Unterschriften?
-            <span class="faq__icon" aria-hidden="true">+</span>
-          </button>
-          <div class="faq__a" hidden>
-            Azubi kann unterschreiben, Ausbilder gegenzeichnen. Damit wird die Abgabe nachvollziehbar und sauber dokumentiert.
-          </div>
-        </div>
+(function(){
+var dots=document.getElementById('carousel-dots');
+var thumbs=document.getElementById('carousel-thumbs');
+SCREENSHOTS.forEach(function(s,i){
+var d=document.createElement('button');d.className='carousel-dot';d.onclick=function(){carouselGo(i)};d.setAttribute('aria-label',s.label);dots.appendChild(d);
+var t=document.createElement('button');t.className='carousel-thumb';t.onclick=function(){carouselGo(i)};
+var im=document.createElement('img');im.src=s.src;im.alt=s.label;im.loading='lazy';t.appendChild(im);thumbs.appendChild(t);
+});
+renderCarousel();startAuto();
+var c=document.getElementById('carousel');
+c.addEventListener('mouseenter',stopAuto);c.addEventListener('mouseleave',startAuto);
+})();
 
-        <div class="finalCta">
-          <div class="finalCta__box">
-            <div class="finalCta__title">Wenn du willst, dass Azubis liefern – gib ihnen ein System.</div>
-            <div class="finalCta__sub">MiseRebel · Azubi Master: Nachweis, Training, Routine. Offline-fähig. Unterschreibbar. Exportierbar.</div>
-            <div class="finalCta__actions">
-              <a class="btn btn--primary" href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener">Jetzt sichern</a>
-              <a class="btn btn--ghost" href="https://rebellemedia.de" target="_blank" rel="noopener">Mehr über 🖤RE:BELLE™ Media</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+/* ── Features ── */
+(function(){
+var grid=document.getElementById('features-grid');
+FEATURES.forEach(function(f){
+var card=document.createElement('div');card.className='glass feature fade-in';
+var html='<div class="btn-glow feature-icon">'+f.icon+'</div><h3>'+f.title+'</h3><p>'+f.desc+'</p>';
+if(f.screens.length){
+html+='<div class="feature-screens">';
+f.screens.forEach(function(s){
+html+='<button class="feature-thumb" onclick="openLightbox(\''+s+'\')"><img src="'+s+'" alt="'+f.title+'" loading="lazy"></button>';
+});
+html+='</div>';
+}
+card.innerHTML=html;grid.appendChild(card);
+});
+})();
 
-    <!-- FOOTER -->
-    <footer class="footer">
-      <div class="wrap footer__inner">
-        <div class="footer__brand">
-          <div class="footer__logo">🖤RE:BELLE™ Media.</div>
-          <div class="footer__tag">The Art of Feeling. Amplified.</div>
-        </div>
-        <div class="footer__links">
-          <a href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener">🖤 newwomanintheshop.com</a>
-          <a href="https://rebellemedia.de" target="_blank" rel="noopener">🖤 rebellemedia.de</a>
-          <a href="mailto:rebelle.media.creator@gmail.com">🖤 rebelle.media.creator@gmail.com</a>
-        </div>
-        <div class="footer__sig">
-          <span class="sig">Tina</span>
-        </div>
-      </div>
-    </footer>
-  </main>
+/* ── Lightbox ── */
+function openLightbox(src){
+document.getElementById('lightbox-img').src=src;
+document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox(){
+document.getElementById('lightbox').classList.remove('open');
+}
 
-  <script src="app.js"></script>
+/* ── Scroll nav ── */
+window.addEventListener('scroll',function(){
+document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+},{passive:true});
+
+/* ── Fade-in observer ── */
+var obs=new IntersectionObserver(function(entries){
+entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.15});
+document.querySelectorAll('.fade-in').forEach(function(el){obs.observe(el)});
+</script>
 </body>
 </html>
