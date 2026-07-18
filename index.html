@@ -3,556 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mise:Rebel™ – Dein digitaler Ausbildungsbegleiter</title>
-<meta name="description" content="Berichtsheft, Prüfungsvorbereitung, Lernquiz und KI-Coach – alles in einer App. Für Azubis und Ausbilder im Gastgewerbe.">
+<title>Mise:Rebel™ – Deine Ausbildung. Deine App.</title>
+<meta name="description" content="Notizen, Aufgaben, Rezepte, Prüfungsvorbereitung und Berichtsheft in einer App. Mise:Rebel™ für 29,90 € einmalig – kein Abo.">
 <link rel="icon" href="favicon.png" type="image/png">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
---bg:#1e2128;--bg2:#1a1d23;--fg:#fff;--muted:#9ca3af;--primary:hsl(20,99%,60%);--primary-dark:hsl(20,99%,45%);
---success:hsl(89,94%,68%);--border:rgba(255,255,255,.12);--glass:rgba(255,255,255,.05);--glass-border:rgba(255,255,255,.12);
---shadow:0 18px 40px rgba(0,0,0,.4);--radius:1rem;
-}
-body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:radial-gradient(1200px 700px at 20% 0%,hsla(20,99%,60%,.10),transparent 60%),radial-gradient(900px 500px at 90% 20%,hsla(89,94%,68%,.06),transparent 60%),linear-gradient(180deg,var(--bg2),var(--bg));background-attachment:fixed;color:var(--fg);min-height:100vh;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-.glass{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);box-shadow:var(--shadow)}
-.btn-glow{border-color:hsla(20,99%,60%,.55);background:linear-gradient(180deg,hsla(20,99%,60%,.28),hsla(20,99%,60%,.12))}
-.btn-success-glow{border-color:hsla(89,94%,68%,.55);background:linear-gradient(180deg,hsla(89,94%,68%,.22),hsla(89,94%,68%,.10))}
-.max-w{max-width:1140px;margin:0 auto;padding:0 16px}
-.max-w-sm{max-width:860px;margin:0 auto;padding:0 16px}
-.max-w-md{max-width:720px;margin:0 auto;padding:0 16px}
-
-/* Nav */
-.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s}
-.nav.scrolled{backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);background:rgba(30,33,40,.8);border-bottom:1px solid var(--border);box-shadow:0 4px 20px rgba(0,0,0,.3)}
-.nav-inner{max-width:1140px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
-.nav-brand{display:flex;align-items:center;gap:10px}
-.nav-logo{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;font-size:18px}
-.nav-links{display:flex;align-items:center;gap:12px}
-.nav-links a.link{font-size:12px;color:var(--muted);transition:.2s}
-.nav-links a.link:hover{color:var(--fg)}
-.nav-cta{padding:8px 16px;border-radius:12px;font-size:12px;font-weight:700;background:var(--primary);color:#fff;transition:.2s}
-.nav-cta:hover{opacity:.9}
-@media(max-width:640px){.nav-links a.link{display:none}}
-
-/* Sections */
-section{padding:80px 0}
-h1{font-size:clamp(2.2rem,6vw,4.2rem);font-weight:900;line-height:1.1;letter-spacing:-.02em}
-h2{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900}
-h3{font-weight:700;font-size:1rem}
-
-/* Hero */
-.hero{padding-top:128px;padding-bottom:80px;text-align:center;position:relative}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:100px;font-size:12px;color:var(--muted);margin-bottom:32px}
-.hero-sub{font-size:clamp(1rem,2.5vw,1.25rem);color:var(--muted);max-width:640px;margin:0 auto 40px;line-height:1.6}
-.hero-sub strong{color:var(--fg)}
-.hero-accent{color:var(--primary)}
-.hero-ctas{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px;margin-bottom:48px}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;border-radius:16px;font-weight:700;color:#fff;background:linear-gradient(135deg,hsl(20,99%,55%),var(--primary-dark));transition:.2s;animation:pulseGlow 3s ease-in-out infinite}
-.btn-primary:hover{transform:scale(1.05)}
-.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;border-radius:16px;font-weight:700;transition:.2s}
-.btn-secondary:hover{transform:scale(1.05)}
-.berufe{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px}
-.beruf{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:100px;font-size:12px;color:var(--muted)}
-.glow1{position:absolute;top:80px;left:25%;width:384px;height:384px;border-radius:50%;opacity:.2;filter:blur(60px);background:hsl(20,99%,60%);pointer-events:none}
-.glow2{position:absolute;top:160px;right:25%;width:256px;height:256px;border-radius:50%;opacity:.1;filter:blur(60px);background:hsl(89,94%,68%);pointer-events:none}
-
-/* Stats */
-.stats{padding:32px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.stats-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:32px;text-align:center}
-.stat-val{font-size:1.5rem;font-weight:900}
-.stat-label{font-size:12px;color:var(--muted)}
-.stat-div{width:1px;height:32px;background:var(--border)}
-@media(max-width:640px){.stat-div{display:none}}
-
-/* Carousel */
-.carousel{position:relative}
-.carousel-main{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 50px rgba(0,0,0,.5);aspect-ratio:16/9;background:var(--bg)}
-.carousel-main img{width:100%;height:100%;object-fit:cover;transition:opacity .5s}
-.carousel-overlay{position:absolute;inset:0;bottom:0;top:auto;height:80px;background:linear-gradient(to top,rgba(0,0,0,.6),transparent)}
-.carousel-label{position:absolute;bottom:16px;left:20px;font-size:14px;font-weight:700;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)}
-.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(30,33,40,.8);backdrop-filter:blur(10px);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;color:var(--fg);font-size:18px;transition:.2s}
-.carousel-btn:hover{transform:translateY(-50%) scale(1.1)}
-.carousel-prev{left:12px}
-.carousel-next{right:12px}
-.carousel-dots{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px}
-.carousel-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;border:0;transition:.2s}
-.carousel-dot.active{width:24px;border-radius:12px;background:var(--primary)}
-.carousel-thumbs{display:flex;gap:8px;margin-top:16px;overflow-x:auto;padding-bottom:8px}
-.carousel-thumb{flex-shrink:0;width:96px;height:56px;border-radius:8px;overflow:hidden;border:2px solid transparent;cursor:pointer;opacity:.6;transition:.2s}
-.carousel-thumb:hover{opacity:1}
-.carousel-thumb.active{border-color:var(--primary);opacity:1;transform:scale(1.05)}
-.carousel-thumb img{width:100%;height:100%;object-fit:cover}
-
-/* Features grid */
-.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-@media(max-width:900px){.features-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.features-grid{grid-template-columns:1fr}}
-.feature{padding:24px;display:flex;flex-direction:column;height:100%}
-.feature-icon{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;margin-bottom:16px;font-size:20px}
-.feature h3{margin-bottom:8px}
-.feature p{font-size:14px;color:var(--muted);line-height:1.6;flex:1}
-.feature-screens{display:flex;gap:8px;margin-top:16px}
-.feature-thumb{width:80px;height:48px;border-radius:8px;overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:.2s}
-.feature-thumb:hover{border-color:var(--primary);transform:scale(1.05)}
-.feature-thumb img{width:100%;height:100%;object-fit:cover}
-
-/* Lightbox */
-.lightbox{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;padding:16px;cursor:pointer;opacity:0;pointer-events:none;transition:.3s}
-.lightbox.open{opacity:1;pointer-events:auto}
-.lightbox img{max-width:100%;max-height:90vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.6);object-fit:contain}
-.lightbox-close{position:absolute;top:24px;right:24px;width:40px;height:40px;border-radius:50%;background:rgba(30,33,40,.8);backdrop-filter:blur(10px);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;color:var(--fg);font-size:18px;transition:.2s}
-.lightbox-close:hover{transform:scale(1.1)}
-
-/* Steps */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;text-align:center}
-@media(max-width:640px){.steps{grid-template-columns:1fr}}
-.step-num{font-size:3rem;font-weight:900;color:var(--primary);opacity:.3;margin-bottom:16px}
-.step-icon{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;margin:0 auto 16px;font-size:22px}
-.step p{font-size:14px;color:var(--muted)}
-
-/* Testimonials */
-.testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-@media(max-width:640px){.testimonials{grid-template-columns:1fr}}
-.testimonial{padding:24px;display:flex;flex-direction:column;height:100%}
-.stars{display:flex;gap:4px;margin-bottom:12px;color:var(--primary)}
-.testimonial blockquote{font-size:14px;color:var(--muted);font-style:italic;line-height:1.6;flex:1}
-.testimonial-footer{margin-top:16px;padding-top:12px;border-top:1px solid var(--border)}
-.testimonial-name{font-size:14px;font-weight:700}
-.testimonial-role{font-size:12px;color:var(--muted)}
-
-/* Pricing */
-.pricing{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-@media(max-width:640px){.pricing{grid-template-columns:1fr}}
-.price-card{padding:32px;position:relative;overflow:hidden}
-.price-badge{position:absolute;top:0;right:0;padding:4px 12px;border-radius:0 0 0 12px;font-size:10px;font-weight:700}
-.price-badge.pilot{background:var(--primary);color:#fff}
-.price-badge.betrieb{color:var(--fg)}
-.price-val{font-size:2.5rem;font-weight:900}
-.price-unit{font-size:14px;color:var(--muted)}
-.price-note{font-size:12px;color:var(--primary);margin:4px 0 24px}
-.price-list{list-style:none;margin-bottom:32px}
-.price-list li{display:flex;align-items:flex-start;gap:8px;font-size:14px;color:var(--muted);padding:6px 0}
-.price-list .check{color:var(--primary);flex-shrink:0;margin-top:2px}
-.price-list .check-green{color:var(--success);flex-shrink:0;margin-top:2px}
-.price-btn{display:block;width:100%;text-align:center;padding:12px 24px;border-radius:12px;font-weight:700;transition:.2s}
-.price-btn:hover{transform:scale(1.05)}
-.price-btn.primary{background:linear-gradient(135deg,hsl(20,99%,55%),var(--primary-dark));color:#fff}
-
-/* FAQ */
-details{margin-bottom:8px}
-details summary{padding:16px 24px;cursor:pointer;font-size:14px;font-weight:700;list-style:none;display:flex;align-items:center;justify-content:space-between}
-details summary::after{content:'▼';font-size:10px;color:var(--muted);transition:.2s}
-details[open] summary::after{transform:rotate(180deg)}
-details .faq-answer{padding:0 24px 16px;font-size:14px;color:var(--muted);line-height:1.6}
-
-/* CTA Banner */
-.cta-banner{border-radius:24px;overflow:hidden;padding:clamp(40px,6vw,56px);text-align:center;background:linear-gradient(135deg,hsl(20,99%,55%),hsl(20,80%,40%));position:relative}
-.cta-banner h2,.cta-banner p,.cta-banner a{position:relative;z-index:1}
-.cta-banner h2{color:#fff;margin-bottom:16px}
-.cta-banner p{color:rgba(255,255,255,.8);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
-.cta-glow{position:absolute;inset:0;opacity:.1;background:radial-gradient(circle at 30% 50%,white,transparent 60%)}
-.cta-btns{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px}
-.btn-white{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;border-radius:16px;font-weight:700;background:#fff;color:#111;transition:.2s}
-.btn-white:hover{transform:scale(1.05)}
-.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;border-radius:16px;font-weight:700;border:2px solid rgba(255,255,255,.3);color:#fff;transition:.2s}
-.btn-outline:hover{background:rgba(255,255,255,.1)}
-
-/* Footer */
-footer{border-top:1px solid var(--border);padding:48px 0}
-.footer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-bottom:40px}
-@media(max-width:640px){.footer-grid{grid-template-columns:1fr}}
-.footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-footer h4{font-weight:700;font-size:14px;margin-bottom:12px}
-footer ul{list-style:none}
-footer li{padding:4px 0}
-footer li a{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px;transition:.2s}
-footer li a:hover{color:var(--fg)}
-.footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
-.footer-copy{font-size:11px;color:var(--muted)}
-.footer-tagline{font-size:10px;color:rgba(156,163,175,.6)}
-
-/* Animations */
-@keyframes pulseGlow{0%,100%{box-shadow:0 0 20px hsla(20,99%,60%,.15)}50%{box-shadow:0 0 40px hsla(20,99%,60%,.3)}}
-.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
-.fade-in.visible{opacity:1;transform:translateY(0)}
-
-/* Scrollbar hide */
-.carousel-thumbs::-webkit-scrollbar{display:none}
-.carousel-thumbs{-ms-overflow-style:none;scrollbar-width:none}
+:root{--blue:#1847d7;--blue-dark:#0f2f91;--white:#fff;--light:#f3f5f8;--text:#161b22;--muted:#667085;--border:#dce2ea;--shadow:0 18px 50px rgba(24,71,215,.12);--radius:22px}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,sans-serif;color:var(--text);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.wrap{width:min(1120px,calc(100% - 32px));margin:auto}
+.nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-in{height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-weight:900;letter-spacing:-.03em}.brand span{color:var(--blue)}
+.nav-links{display:flex;align-items:center;gap:22px;font-size:14px;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:14px;padding:14px 22px;font-weight:800;transition:.2s;border:1px solid transparent}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 10px 28px rgba(24,71,215,.24)}
+.btn-secondary{background:#fff;border-color:var(--border);color:var(--text)}
+.hero{padding:82px 0 70px;background:linear-gradient(180deg,#fff 0%,#f7f9fc 100%)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.eyebrow{display:inline-flex;padding:8px 13px;border-radius:999px;background:#eaf0ff;color:var(--blue);font-size:13px;font-weight:800;margin-bottom:24px}
+h1{font-size:clamp(2.55rem,6vw,5.2rem);line-height:.98;letter-spacing:-.055em;margin-bottom:24px}
+h1 span{color:var(--blue)}
+.lead{font-size:clamp(1.05rem,2vw,1.25rem);line-height:1.65;color:var(--muted);max-width:650px;margin-bottom:30px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:22px}
+.trust{display:flex;flex-wrap:wrap;gap:15px;color:var(--muted);font-size:13px;font-weight:600}
+.phone-stage{position:relative;min-height:550px;display:grid;place-items:center}
+.phone-stage::before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:rgba(24,71,215,.12);filter:blur(2px)}
+.phone{position:relative;width:min(330px,82vw);padding:10px;background:#111827;border-radius:42px;box-shadow:0 30px 70px rgba(15,47,145,.27);transform:rotate(2deg)}
+.phone img{display:block;width:100%;aspect-ratio:9/18.5;object-fit:cover;object-position:top;border-radius:33px;background:var(--light)}
+.price-float{position:absolute;right:0;bottom:60px;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow);border-radius:18px;padding:16px 20px;font-weight:900;color:var(--blue)}
+.strip{padding:25px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.strip-in{display:flex;justify-content:center;flex-wrap:wrap;gap:32px;color:var(--muted);font-size:14px;font-weight:700}
+.section{padding:90px 0}.section.alt{background:var(--light)}
+.center{text-align:center}.section h2{font-size:clamp(2rem,4vw,3.3rem);letter-spacing:-.045em;margin-bottom:16px}.sub{color:var(--muted);line-height:1.65;max-width:670px;margin:0 auto}
+.gallery{margin-top:45px}.gallery-main{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);background:#fff}.gallery-main img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover;object-position:top}.thumbs{display:flex;gap:10px;overflow:auto;margin-top:14px;padding-bottom:4px}.thumb{flex:0 0 115px;border:2px solid transparent;border-radius:12px;overflow:hidden;background:#fff;cursor:pointer;opacity:.66}.thumb.active{border-color:var(--blue);opacity:1}.thumb img{display:block;width:100%;height:67px;object-fit:cover}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:45px}.card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:25px}.icon{width:46px;height:46px;border-radius:13px;background:#eaf0ff;color:var(--blue);display:grid;place-items:center;font-size:21px;margin-bottom:17px}.card h3{margin-bottom:9px}.card p{color:var(--muted);font-size:14px;line-height:1.6}
+.price-wrap{max-width:680px;margin:45px auto 0}.price-card{background:#fff;border:2px solid var(--blue);border-radius:28px;padding:clamp(28px,5vw,48px);box-shadow:0 25px 70px rgba(24,71,215,.15);position:relative;overflow:hidden}.price-card::before{content:"";position:absolute;right:-90px;top:-90px;width:220px;height:220px;border-radius:50%;background:#eaf0ff}.pizza{font-size:clamp(1.7rem,4vw,2.7rem);font-weight:900;line-height:1.12;letter-spacing:-.04em;position:relative}.pizza span{color:var(--blue)}.price{font-size:clamp(3.5rem,9vw,6rem);font-weight:900;color:var(--blue);letter-spacing:-.06em;margin:28px 0 2px;position:relative}.once{font-weight:800;color:var(--muted);margin-bottom:28px}.price-list{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:12px 18px;margin-bottom:30px}.price-list li{display:flex;gap:9px;color:var(--muted);font-size:14px}.check{color:var(--blue);font-weight:900}.full{width:100%;font-size:17px}.fine{text-align:center;color:var(--muted);font-size:12px;margin-top:14px}
+.faq{max-width:760px;margin:40px auto 0}.faq details{background:#fff;border:1px solid var(--border);border-radius:15px;margin-bottom:10px;padding:0 20px}.faq summary{cursor:pointer;font-weight:800;padding:19px 0}.faq p{color:var(--muted);line-height:1.65;padding:0 0 20px}
+.cta{padding:80px 0}.cta-box{background:var(--blue);color:#fff;border-radius:28px;padding:clamp(35px,6vw,65px);text-align:center}.cta-box h2{font-size:clamp(2rem,4vw,3.5rem);letter-spacing:-.05em;margin-bottom:14px}.cta-box p{color:rgba(255,255,255,.82);margin-bottom:27px}.cta-box .btn{background:#fff;color:var(--blue)}
+footer{padding:40px 0;border-top:1px solid var(--border);color:var(--muted);font-size:12px}.footer-in{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+@media(max-width:850px){.hero-grid{grid-template-columns:1fr;text-align:center}.lead{margin-left:auto;margin-right:auto}.hero-actions,.trust{justify-content:center}.phone-stage{min-height:500px}.features{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.nav-links a:not(.btn){display:none}.hero{padding-top:56px}.features{grid-template-columns:1fr}.price-list{grid-template-columns:1fr}.phone-stage{min-height:450px}.price-float{right:4px;bottom:30px}.section{padding:70px 0}}
 </style>
 </head>
 <body>
-
-<!-- ═══ NAV ═══ -->
-<nav class="nav" id="nav">
-<div class="nav-inner">
-<div class="nav-brand">
-<div class="glass nav-logo">🖤</div>
-<span style="font-weight:900;font-size:14px">Mise:Rebel™</span>
-</div>
-<div class="nav-links">
-<a href="#features" class="link">Features</a>
-<a href="#pricing" class="link">Preise</a>
-<a href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener noreferrer" class="nav-cta">Jetzt kaufen</a>
-</div>
-</div>
-</nav>
-
-<!-- ═══ HERO ═══ -->
-<section class="hero" style="padding-left:16px;padding-right:16px">
-<div class="glow1"></div>
-<div class="glow2"></div>
-<div style="max-width:860px;margin:0 auto;position:relative;z-index:1">
-<div class="glass hero-badge fade-in">✨ Neu: AP1 &amp; AP2 mit IHK-Kompetenzmatrix</div>
-<h1 class="fade-in">Dein digitaler<br><span class="hero-accent">Ausbildungs&shy;begleiter</span></h1>
-<p class="hero-sub fade-in">Berichtsheft, Prüfungsvorbereitung, Lernquiz und KI-Coach – alles in einer App. Für <strong>Azubis</strong> und <strong>Ausbilder</strong> im Gastgewerbe.</p>
-<div class="hero-ctas fade-in">
-<a href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener noreferrer" class="btn-primary">Jetzt kaufen →</a>
-<a href="#features" class="glass btn-secondary">Features entdecken ▾</a>
-</div>
-<div class="berufe fade-in">
-<span class="glass beruf">🧑‍🍳 Koch / Köchin</span>
-<span class="glass beruf">👥 Restaurantfachmann/-frau</span>
-<span class="glass beruf">⭐ Hotelfachmann/-frau</span>
-<span class="glass beruf">❤️ Fachkraft im Gastgewerbe</span>
-<span class="glass beruf">📊 Systemgastronomie</span>
-</div>
-</div>
-</section>
-
-<!-- ═══ STATS ═══ -->
-<section class="stats">
-<div class="stats-inner max-w">
-<div><div class="stat-val">474+</div><div class="stat-label">Prüfungsfragen</div></div>
-<div class="stat-div"></div>
-<div><div class="stat-val">5</div><div class="stat-label">Ausbildungsberufe</div></div>
-<div class="stat-div"></div>
-<div><div class="stat-val">3</div><div class="stat-label">Sprachen</div></div>
-<div class="stat-div"></div>
-<div><div class="stat-val">100%</div><div class="stat-label">Offline-fähig</div></div>
-<div class="stat-div"></div>
-<div><div class="stat-val">AO 2022</div><div class="stat-label">Konform</div></div>
-</div>
-</section>
-
-<!-- ═══ SCREENSHOT GALLERY ═══ -->
-<section style="padding:80px 16px;overflow:hidden">
-<div class="max-w">
-<div class="fade-in" style="text-align:center;margin-bottom:40px">
-<h2>So sieht's aus</h2>
-<p style="color:var(--muted);max-width:480px;margin:16px auto 0">Einblicke in die App – vom Berichtsheft bis zum Ausbilder-Dashboard.</p>
-</div>
-<div class="carousel fade-in" id="carousel">
-<div class="carousel-main">
-<img id="carousel-img" src="screenshots/hero-brand.jpg" alt="">
-<div class="carousel-overlay"></div>
-<p class="carousel-label" id="carousel-label"></p>
-</div>
-<button class="carousel-btn carousel-prev" onclick="carouselPrev()" aria-label="Vorheriges Bild">‹</button>
-<button class="carousel-btn carousel-next" onclick="carouselNext()" aria-label="Nächstes Bild">›</button>
-<div class="carousel-dots" id="carousel-dots"></div>
-<div class="carousel-thumbs" id="carousel-thumbs"></div>
-</div>
-</div>
-</section>
-
-<!-- ═══ FEATURES ═══ -->
-<section id="features" style="padding:80px 16px">
-<div class="max-w">
-<div class="fade-in" style="text-align:center;margin-bottom:56px">
-<h2>Alles, was du brauchst</h2>
-<p style="color:var(--muted);max-width:480px;margin:16px auto 0">Eine Plattform – vom ersten Ausbildungstag bis zur Abschlussprüfung.</p>
-</div>
-<div class="features-grid" id="features-grid"></div>
-</div>
-</section>
-
-<!-- ═══ HOW IT WORKS ═══ -->
-<section style="padding:80px 16px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-<div class="max-w-sm">
-<h2 class="fade-in" style="text-align:center;margin-bottom:56px">So funktioniert's</h2>
-<div class="steps">
-<div class="fade-in" style="text-align:center">
-<div class="step-num">01</div>
-<div class="glass step-icon btn-glow">👥</div>
-<h3>Registrieren</h3>
-<p>Konto erstellen – Azubi oder Ausbilder. Betriebsnummer eingeben und loslegen.</p>
-</div>
-<div class="fade-in" style="text-align:center">
-<div class="step-num">02</div>
-<div class="glass step-icon btn-glow">📖</div>
-<h3>Lernen & Dokumentieren</h3>
-<p>Berichtsheft schreiben, Quiz absolvieren, Prüfungen simulieren – alles an einem Ort.</p>
-</div>
-<div class="fade-in" style="text-align:center">
-<div class="step-num">03</div>
-<div class="glass step-icon btn-glow">🎓</div>
-<h3>Prüfung bestehen</h3>
-<p>Mit Kompetenzmatrix und Schwächentraining gezielt auf AP1 &amp; AP2 vorbereiten.</p>
-</div>
-</div>
-</div>
-</section>
-
-<!-- ═══ TESTIMONIALS ═══ -->
-<section style="padding:80px 16px">
-<div class="max-w">
-<h2 class="fade-in" style="text-align:center;margin-bottom:56px">Was andere sagen</h2>
-<div class="testimonials">
-<div class="glass testimonial fade-in">
-<div class="stars">★★★★★</div>
-<blockquote>„Endlich ein Berichtsheft, das man gerne schreibt. Die Vorschläge sparen mir jeden Tag 15 Minuten."</blockquote>
-<div class="testimonial-footer">
-<div class="testimonial-name">Lukas M.</div>
-<div class="testimonial-role">Koch-Azubi, 2. Lehrjahr</div>
-</div>
-</div>
-<div class="glass testimonial fade-in">
-<div class="stars">★★★★★</div>
-<blockquote>„Als Ausbilder habe ich jetzt den vollen Überblick über alle meine Azubis – Prüfungsergebnisse, Berichte, alles."</blockquote>
-<div class="testimonial-footer">
-<div class="testimonial-name">Sandra K.</div>
-<div class="testimonial-role">Küchenchefin &amp; Ausbilderin</div>
-</div>
-</div>
-<div class="glass testimonial fade-in">
-<div class="stars">★★★★★</div>
-<blockquote>„Das Quiz-System mit XP und Badges macht süchtig. Meine AP1-Simulation war dann fast zu einfach!"</blockquote>
-<div class="testimonial-footer">
-<div class="testimonial-name">Mehmet A.</div>
-<div class="testimonial-role">ReFa-Azubi, 3. Lehrjahr</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- ═══ PRICING ═══ -->
-<section id="pricing" style="padding:80px 16px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-<div class="max-w-sm">
-<div class="fade-in" style="text-align:center;margin-bottom:56px">
-<h2>Transparent &amp; fair</h2>
-<p style="color:var(--muted);margin-top:16px">Einmalige Lizenz – keine versteckten Kosten, keine Abos.</p>
-</div>
-<div class="pricing">
-<div class="glass price-card fade-in">
-<div class="price-badge pilot">PILOT-ANGEBOT</div>
-<h3>Pilot-Lizenz</h3>
-<div style="margin:8px 0 4px"><span class="price-val">520 €</span> <span class="price-unit">einmalig</span></div>
-<div class="price-note">300 € werden auf die Volllizenz angerechnet</div>
-<ul class="price-list">
-<li><span class="check">✓</span> Alle Features inklusive</li>
-<li><span class="check">✓</span> Bis zu 20 Azubi-Accounts</li>
-<li><span class="check">✓</span> Ausbilder-Dashboard</li>
-<li><span class="check">✓</span> Offline-Desktop-App</li>
-<li><span class="check">✓</span> E-Mail-Support</li>
-<li><span class="check">✓</span> Kostenlose Updates im Pilotzeitraum</li>
-</ul>
-<a href="mailto:rebelle.media.creator@gmail.com?subject=Mise:Rebel™ Pilot-Lizenz Anfrage" class="price-btn primary">Pilot-Zugang anfragen</a>
-</div>
-<div class="glass price-card fade-in" style="border:1px solid hsla(20,99%,60%,.3)">
-<div class="price-badge betrieb btn-success-glow">BETRIEB</div>
-<h3>Betriebs-Lizenz</h3>
-<div style="margin:8px 0 4px"><span class="price-val">Individuell</span></div>
-<div class="price-note" style="color:var(--muted)">Maßgeschneidert für Ihren Betrieb</div>
-<ul class="price-list">
-<li><span class="check-green">✓</span> Unbegrenzte Azubi-Accounts</li>
-<li><span class="check-green">✓</span> Mehrere Ausbilder-Zugänge</li>
-<li><span class="check-green">✓</span> Eigene Betriebsrezepte &amp; Lehrpläne</li>
-<li><span class="check-green">✓</span> White-Label-Option</li>
-<li><span class="check-green">✓</span> Prioritäts-Support</li>
-<li><span class="check-green">✓</span> Individuelle Anpassungen</li>
-</ul>
-<a href="mailto:rebelle.media.creator@gmail.com?subject=Mise:Rebel™ Betriebs-Lizenz Anfrage" class="glass price-btn">Angebot anfordern</a>
-</div>
-</div>
-</div>
-</section>
-
-<!-- ═══ FAQ ═══ -->
-<section style="padding:80px 16px">
-<div class="max-w-md">
-<h2 class="fade-in" style="text-align:center;margin-bottom:56px">Häufige Fragen</h2>
-<details class="glass fade-in"><summary>Funktioniert die App auch offline?</summary><div class="faq-answer">Ja! Mise:Rebel™ ist eine PWA mit voller Offline-Funktionalität. Zusätzlich bieten wir eine native Desktop-App für Windows, macOS und Linux.</div></details>
-<details class="glass fade-in"><summary>Ist das Berichtsheft IHK-konform?</summary><div class="faq-answer">Die Software orientiert sich an der KochAusbV 2022 und bietet alle Felder, die für den Ausbildungsnachweis benötigt werden. Der Export erfolgt als PDF.</div></details>
-<details class="glass fade-in"><summary>Welche Ausbildungsberufe werden unterstützt?</summary><div class="faq-answer">Koch/Köchin, Restaurantfachmann/-frau, Hotelfachmann/-frau, Fachkraft im Gastgewerbe und Fachmann/-frau für Systemgastronomie.</div></details>
-<details class="glass fade-in"><summary>Können mehrere Ausbilder auf einen Betrieb zugreifen?</summary><div class="faq-answer">Ja, mit der Betriebs-Lizenz können mehrere Ausbilder-Accounts angelegt und Azubis zugewiesen werden.</div></details>
-<details class="glass fade-in"><summary>Wie sicher sind meine Daten?</summary><div class="faq-answer">Alle Daten werden verschlüsselt auf EU-Servern gespeichert. Digitale Signaturen nutzen SHA-256-Hashing. DSGVO-konform.</div></details>
-</div>
-</section>
-
-<!-- ═══ CTA ═══ -->
-<section style="padding:80px 16px">
-<div class="max-w-md">
-<div class="cta-banner fade-in">
-<div class="cta-glow"></div>
-<h2>Bereit durchzustarten?</h2>
-<p>Sichere dir jetzt Mise:Rebel™ und erlebe, wie einfach Ausbildung digital sein kann.</p>
-<div class="cta-btns">
-<a href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener noreferrer" class="btn-white">Jetzt kaufen →</a>
-<a href="mailto:rebelle.media.creator@gmail.com?subject=Mise:Rebel™ Demo anfragen" class="btn-outline">✉ Demo anfragen</a>
-</div>
-</div>
-</div>
-</section>
-
-<!-- ═══ FOOTER ═══ -->
-<footer>
-<div class="max-w">
-<div class="footer-grid">
-<div>
-<div class="footer-brand">
-<div class="glass" style="width:36px;height:36px;border-radius:12px;display:grid;place-items:center;font-size:18px">🖤</div>
-<div>
-<div style="font-weight:900;font-size:14px">Mise:Rebel™</div>
-<div style="font-size:10px;color:var(--muted)">by RE:BELLE™ Media</div>
-</div>
-</div>
-<p style="font-size:12px;font-style:italic;color:var(--muted);margin-bottom:12px">The Art of Feeling. Amplified.</p>
-<p style="font-size:12px;color:var(--muted);line-height:1.6">Tina Schlesier<br>Nordstr. 5<br>09212 Limbach-Oberfrohna</p>
-</div>
-<div>
-<h4>Links</h4>
-<ul>
-<li><a href="https://portfolio.rebellemedia.de" target="_blank" rel="noopener noreferrer">🌐 portfolio.rebellemedia.de</a></li>
-<li><a href="https://newwomanintheshop.com" target="_blank" rel="noopener noreferrer">🌐 newwomanintheshop.com</a></li>
-<li><a href="https://rebellemedia.de" target="_blank" rel="noopener noreferrer">🌐 rebellemedia.de</a></li>
-<li><a href="https://feel.rebellemedia.de" target="_blank" rel="noopener noreferrer">❤️ feel.rebellemedia.de</a></li>
-</ul>
-</div>
-<div>
-<h4>Kontakt &amp; Rechtliches</h4>
-<ul>
-<li><a href="mailto:rebelle.media.creator@gmail.com">✉ rebelle.media.creator@gmail.com</a></li>
-<li><a href="https://rebellemedia.de/agb" target="_blank" rel="noopener noreferrer">📄 AGB</a></li>
-<li><a href="https://rebellemedia.de/datenschutz" target="_blank" rel="noopener noreferrer">🛡 Datenschutz</a></li>
-<li><a href="https://rebellemedia.de/impressum" target="_blank" rel="noopener noreferrer">📄 Impressum</a></li>
-</ul>
-</div>
-</div>
-<div class="footer-bottom">
-<p class="footer-copy">© 2025 Mise:Rebel™ by RE:BELLE™ Media. Alle Rechte vorbehalten.</p>
-<p class="footer-tagline">🖤 The Art of Feeling. Amplified.</p>
-</div>
-</div>
-</footer>
-
-<!-- ═══ LIGHTBOX ═══ -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-<img id="lightbox-img" src="" alt="">
-<button class="lightbox-close" onclick="closeLightbox()">✕</button>
-</div>
-
+<nav class="nav"><div class="wrap nav-in"><a class="brand" href="#top">MISE:<span>REBEL™</span></a><div class="nav-links"><a href="#screens">App ansehen</a><a href="#features">Funktionen</a><a href="#preis">Preis</a><a class="btn btn-primary" href="#preis">Jetzt starten</a></div></div></nav>
+<main id="top">
+<section class="hero"><div class="wrap hero-grid"><div><div class="eyebrow">📱 Für iPhone, Android und Browser</div><h1>Deine Ausbildung.<br><span>Direkt in deiner Hand.</span></h1><p class="lead">Notizen, Aufgaben, Rezepte, Lernstoff, Prüfungsvorbereitung und Berichtsheft – alles an einem Ort. Vom ersten Arbeitstag bis zur Abschlussprüfung.</p><div class="hero-actions"><a class="btn btn-primary" href="#preis">Jetzt für 29,90 € starten</a><a class="btn btn-secondary" href="#screens">App ansehen</a></div><div class="trust"><span>✓ Einmalzahlung</span><span>✓ Kein Abo</span><span>✓ Keine monatlichen Kosten</span></div></div><div class="phone-stage"><div class="phone"><img src="screenshots/hero-brand.jpg" alt="Mise:Rebel App auf dem Smartphone"></div><div class="price-float">29,90 € einmalig</div></div></div></section>
+<section class="strip"><div class="wrap strip-in"><span>Notizen</span><span>Aufgaben</span><span>Rezepte</span><span>Prüfung</span><span>Berichtsheft</span><span>Offline nutzbar</span></div></section>
+<section class="section" id="screens"><div class="wrap"><div class="center"><h2>So sieht deine Ausbildung digital aus.</h2><p class="sub">Keine erfundenen Werbe-Screens. Hier siehst du die echte App und ihre Funktionen.</p></div><div class="gallery"><div class="gallery-main"><img id="main-shot" src="screenshots/hero-brand.jpg" alt="Mise:Rebel Screenshot"></div><div class="thumbs" id="thumbs"></div></div></div></section>
+<section class="section alt" id="features"><div class="wrap"><div class="center"><h2>Alles dabei. Nichts verstreut.</h2><p class="sub">Du musst nicht mehr zwischen Zetteln, Chats, Handy-Notizen und Lernapps wechseln.</p></div><div class="features"><article class="card"><div class="icon">📝</div><h3>Schnelle Notizen</h3><p>Halte neue Abläufe, Fachbegriffe und wichtige Hinweise direkt während deiner Schicht fest.</p></article><article class="card"><div class="icon">📅</div><h3>Aufgaben & Termine</h3><p>Behalte Abgaben, Berufsschule, Prüfungen und deine nächsten Schritte im Blick.</p></article><article class="card"><div class="icon">🍳</div><h3>Rezepte & Warenkunde</h3><p>Speichere Rezepte, Arbeitsabläufe und Wissen, das du im Alltag wirklich brauchst.</p></article><article class="card"><div class="icon">🎓</div><h3>Prüfungsvorbereitung</h3><p>Übe mit Lernquiz, Prüfungsfragen und deinen persönlichen Schwerpunkten.</p></article><article class="card"><div class="icon">📄</div><h3>Berichtsheft</h3><p>Führe dein digitales Berichtsheft und exportiere deine Einträge bei Bedarf als PDF.</p></article><article class="card"><div class="icon">📱</div><h3>Immer dabei</h3><p>Nutze Mise:Rebel auf iPhone, Android, Tablet oder direkt im Browser.</p></article></div></div></section>
+<section class="section" id="preis"><div class="wrap"><div class="center"><h2>Ein Angebot. Ein Preis.</h2><p class="sub">Keine Pakete. Keine verwirrenden Lizenzen. Du bekommst den vollständigen Zugang.</p></div><div class="price-wrap"><div class="price-card"><div class="pizza">Weniger als ein Abend Pizza.<br><span>Mehr Ordnung für deine ganze Ausbildung.</span></div><div class="price">29,90 €</div><div class="once">einmalig</div><ul class="price-list"><li><span class="check">✓</span> Alle App-Funktionen</li><li><span class="check">✓</span> iPhone & Android</li><li><span class="check">✓</span> Tablet & Browser</li><li><span class="check">✓</span> Kein Abo</li><li><span class="check">✓</span> Keine monatlichen Kosten</li><li><span class="check">✓</span> Zukünftige Updates</li></ul><a class="btn btn-primary full" href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener noreferrer">Jetzt Zugang für 29,90 € sichern</a><p class="fine">Einmal kaufen. Direkt loslegen.</p></div></div></div></section>
+<section class="section alt"><div class="wrap"><div class="center"><h2>Häufige Fragen</h2></div><div class="faq"><details><summary>Ist das ein Abo?</summary><p>Nein. Du zahlst 29,90 € einmalig. Es gibt keine monatlichen Kosten und keine automatische Verlängerung.</p></details><details><summary>Auf welchen Geräten funktioniert Mise:Rebel?</summary><p>Die App ist für Smartphones optimiert und kann auf iPhone, Android, Tablet und im Browser genutzt werden.</p></details><details><summary>Ist das Berichtsheft weiterhin enthalten?</summary><p>Ja. Das Berichtsheft bleibt eine Funktion der App. Im Mittelpunkt steht aber dein gesamter Ausbildungsalltag.</p></details><details><summary>Für welche Berufe ist die App gedacht?</summary><p>Für Auszubildende in Gastronomie und Hotellerie, darunter Küche, Restaurant, Hotel und Systemgastronomie.</p></details></div></div></section>
+<section class="cta"><div class="wrap"><div class="cta-box"><h2>Ausbildung ist kompliziert genug.</h2><p>Deine Organisation muss es nicht sein.</p><a class="btn" href="https://www.newwomanintheshop.com/products/miserebel-azubi-master-offline-paket-berichtsheft-ap1-ap2-training-ausbilder-dashboard" target="_blank" rel="noopener noreferrer">Mise:Rebel für 29,90 € holen</a></div></div></section>
+</main>
+<footer><div class="wrap footer-in"><div><strong>Mise:Rebel™</strong> by RE:BELLE™ Media</div><div><a href="https://rebellemedia.de/impressum" target="_blank" rel="noopener">Impressum</a> · <a href="https://rebellemedia.de/datenschutz" target="_blank" rel="noopener">Datenschutz</a> · <a href="https://rebellemedia.de/agb" target="_blank" rel="noopener">AGB</a></div><div>© 2026 RE:BELLE™ Media</div></div></footer>
 <script>
-/* ── Screenshot data ── */
-var SCREENSHOTS=[
-{src:'screenshots/hero-brand.jpg',label:'Mise:Rebel™ – Deine Lernplattform'},
-{src:'screenshots/berichtsheft.jpg',label:'Digitales Berichtsheft'},
-{src:'screenshots/berichtsheft-form.jpg',label:'Tagesbericht mit Vorschlägen'},
-{src:'screenshots/rahmenplan.jpg',label:'Ausbildungsrahmenplan (AO 2022)'},
-{src:'screenshots/glossar.jpg',label:'Glossar – 1.986 Fachbegriffe'},
-{src:'screenshots/warenkunde.jpg',label:'Saisonale Warenkunde'},
-{src:'screenshots/lernquiz.jpg',label:'Lernquiz mit Spaced Repetition'},
-{src:'screenshots/ap1-pruefung.jpg',label:'AP1 Prüfungssimulation'},
-{src:'screenshots/ap2-pruefung.jpg',label:'AP2 Prüfungssimulation'},
-{src:'screenshots/lernmodule.jpg',label:'Interaktive Lernmodule'},
-{src:'screenshots/rezeptbuch.jpg',label:'Rezeptbuch nach Lehrjahr'},
-{src:'screenshots/ausbilder-dashboard.jpg',label:'Ausbilder Dashboard'},
-{src:'screenshots/rezeptverwaltung.jpg',label:'Rezeptverwaltung (Ausbilder)'},
-{src:'screenshots/nachrichten.jpg',label:'Nachrichten-System'},
-{src:'screenshots/access-gate.jpg',label:'Geschützter Zugang'},
-{src:'screenshots/login-selection.jpg',label:'Login & Registrierung'},
-{src:'screenshots/login-form.jpg',label:'Anmeldung'},
-{src:'screenshots/info-status.jpg',label:'Info & Synchronisation'},
-{src:'screenshots/ki-coach.jpg',label:'KI-Ausbildungscoach'},
-{src:'screenshots/sync.jpg',label:'Offline-Synchronisation'},
-{src:'screenshots/einstellungen.jpg',label:'Profil & Einstellungen'},
-{src:'screenshots/cloud-2fa.jpg',label:'Cloud & 2-Faktor-Auth'},
-{src:'screenshots/rechtliches.jpg',label:'Rechtliche Hinweise & Datenschutz'}
-];
-
-var FEATURES=[
-{icon:'📄',title:'Digitales Berichtsheft',desc:'Tages- & Wochenberichte mit Auto-Vorschlägen, PDF-Export und IHK-konformer Struktur nach KochAusbV 2022.',screens:['screenshots/berichtsheft.jpg','screenshots/berichtsheft-form.jpg']},
-{icon:'🎓',title:'AP1 & AP2 Prüfungssimulation',desc:'474+ Fragen, IHK-Kompetenzmatrix, Schwächentraining und detaillierte Ergebnisanalyse nach AO 2022.',screens:['screenshots/ap1-pruefung.jpg','screenshots/ap2-pruefung.jpg']},
-{icon:'🧠',title:'Lernquiz mit Gamification',desc:'XP-System, Streak-Boni, Badges und Spaced Repetition für nachhaltiges Lernen.',screens:['screenshots/lernquiz.jpg']},
-{icon:'📖',title:'Glossar (DE/EN/FR)',desc:'Dreisprachiges Fachglossar mit über 500 Begriffen aus dem Gastgewerbe.',screens:['screenshots/glossar.jpg']},
-{icon:'🤖',title:'KI-Lernhilfe',desc:'Persönlicher Koch-Coach mit künstlicher Intelligenz – erklärt, übt und motiviert.',screens:['screenshots/ki-coach.jpg']},
-{icon:'🛡',title:'Ausbilder-Dashboard',desc:'Überblick über alle Azubis: Berichtshefte, Prüfungsergebnisse, Kompetenzfortschritt und Nachrichten.',screens:['screenshots/ausbilder-dashboard.jpg','screenshots/rezeptverwaltung.jpg']},
-{icon:'🥕',title:'Warenkunde',desc:'Interaktive Warenkunde mit Bildern, Saisonkalender und Fachbegriffen.',screens:['screenshots/warenkunde.jpg']},
-{icon:'📚',title:'Rahmenplan-Tracking',desc:'Vollständiger Ausbildungsrahmenplan mit Fortschrittsverfolgung und betrieblicher Zuordnung.',screens:['screenshots/rahmenplan.jpg']},
-{icon:'🧑‍🍳',title:'Rezeptbuch',desc:'Digitale Rezeptsammlung mit Kalkulation, Portionierung und Ausbilder-Zuweisungen.',screens:['screenshots/rezeptbuch.jpg']},
-{icon:'💬',title:'Nachrichten',desc:'Direkter Kanal zwischen Azubi und Ausbilder – im Betrieb und unterwegs.',screens:['screenshots/nachrichten.jpg']},
-{icon:'🔒',title:'E-Signatur & Audit',desc:'SHA-256-gesicherte digitale Unterschriften mit lückenloser Änderungshistorie.',screens:['screenshots/cloud-2fa.jpg']},
-{icon:'📱',title:'Offline & Desktop',desc:'Vollständig offline-fähig als PWA und native Desktop-App (Windows, macOS, Linux).',screens:['screenshots/sync.jpg','screenshots/einstellungen.jpg']}
-];
-
-/* ── Carousel ── */
-var ci=0,autoPlay;
-function renderCarousel(){
-var img=document.getElementById('carousel-img');
-var label=document.getElementById('carousel-label');
-img.src=SCREENSHOTS[ci].src;img.alt=SCREENSHOTS[ci].label;
-label.textContent=SCREENSHOTS[ci].label;
-document.querySelectorAll('.carousel-dot').forEach(function(d,i){d.className='carousel-dot'+(i===ci?' active':'')});
-document.querySelectorAll('.carousel-thumb').forEach(function(d,i){d.className='carousel-thumb'+(i===ci?' active':'')});
-}
-function carouselNext(){ci=(ci+1)%SCREENSHOTS.length;renderCarousel()}
-function carouselPrev(){ci=(ci-1+SCREENSHOTS.length)%SCREENSHOTS.length;renderCarousel()}
-function carouselGo(i){ci=i;renderCarousel()}
-function startAuto(){autoPlay=setInterval(carouselNext,4000)}
-function stopAuto(){clearInterval(autoPlay)}
-
-(function(){
-var dots=document.getElementById('carousel-dots');
-var thumbs=document.getElementById('carousel-thumbs');
-SCREENSHOTS.forEach(function(s,i){
-var d=document.createElement('button');d.className='carousel-dot';d.onclick=function(){carouselGo(i)};d.setAttribute('aria-label',s.label);dots.appendChild(d);
-var t=document.createElement('button');t.className='carousel-thumb';t.onclick=function(){carouselGo(i)};
-var im=document.createElement('img');im.src=s.src;im.alt=s.label;im.loading='lazy';t.appendChild(im);thumbs.appendChild(t);
-});
-renderCarousel();startAuto();
-var c=document.getElementById('carousel');
-c.addEventListener('mouseenter',stopAuto);c.addEventListener('mouseleave',startAuto);
-})();
-
-/* ── Features ── */
-(function(){
-var grid=document.getElementById('features-grid');
-FEATURES.forEach(function(f){
-var card=document.createElement('div');card.className='glass feature fade-in';
-var html='<div class="btn-glow feature-icon">'+f.icon+'</div><h3>'+f.title+'</h3><p>'+f.desc+'</p>';
-if(f.screens.length){
-html+='<div class="feature-screens">';
-f.screens.forEach(function(s){
-html+='<button class="feature-thumb" onclick="openLightbox(\''+s+'\')"><img src="'+s+'" alt="'+f.title+'" loading="lazy"></button>';
-});
-html+='</div>';
-}
-card.innerHTML=html;grid.appendChild(card);
-});
-})();
-
-/* ── Lightbox ── */
-function openLightbox(src){
-document.getElementById('lightbox-img').src=src;
-document.getElementById('lightbox').classList.add('open');
-}
-function closeLightbox(){
-document.getElementById('lightbox').classList.remove('open');
-}
-
-/* ── Scroll nav ── */
-window.addEventListener('scroll',function(){
-document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
-},{passive:true});
-
-/* ── Fade-in observer ── */
-var obs=new IntersectionObserver(function(entries){
-entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:0.15});
-document.querySelectorAll('.fade-in').forEach(function(el){obs.observe(el)});
+const shots=[['screenshots/hero-brand.jpg','Start'],['screenshots/berichtsheft.jpg','Berichtsheft'],['screenshots/berichtsheft-form.jpg','Tagesbericht'],['screenshots/rezeptbuch.jpg','Rezeptbuch'],['screenshots/lernquiz.jpg','Lernquiz'],['screenshots/ap1-pruefung.jpg','AP1 Prüfung'],['screenshots/ap2-pruefung.jpg','AP2 Prüfung'],['screenshots/glossar.jpg','Glossar'],['screenshots/warenkunde.jpg','Warenkunde'],['screenshots/ki-coach.jpg','KI-Coach'],['screenshots/einstellungen.jpg','Einstellungen']];
+const thumbs=document.getElementById('thumbs'),main=document.getElementById('main-shot');
+shots.forEach((s,i)=>{const b=document.createElement('button');b.className='thumb'+(i===0?' active':'');b.setAttribute('aria-label',s[1]);b.innerHTML=`<img src="${s[0]}" alt="${s[1]}" loading="lazy">`;b.onclick=()=>{main.src=s[0];main.alt=s[1];document.querySelectorAll('.thumb').forEach(x=>x.classList.remove('active'));b.classList.add('active')};thumbs.appendChild(b)});
 </script>
 </body>
 </html>
